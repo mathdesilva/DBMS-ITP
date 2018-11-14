@@ -37,7 +37,7 @@ int menu_addcoluna(){
 		printf("======= ADD COLUNA =======\n");
 		printf("  1 - Add nova coluna\n");
 		printf("  0 - Sair\n");
-		printf("Digite uma opção:");
+		printf("Digite uma opção: ");
 		scanf("%d", &op);
 
 		if(op >=0 && op <=1)

@@ -43,8 +43,13 @@ int add_tabela(){
 
 int add_coluna(char nome[60]){
 	char titulo[60], tipo[60];
-	int op;
+	int chave=0, op;
 	printf("Nome da coluna: ");
 	scanf("%s", titulo);
 	op = menu_tipo();
+	// TODO: add chave primaria
+
+	FILE * arq = fopen(nome, "w");
+
+	fclose(arq);
 }
