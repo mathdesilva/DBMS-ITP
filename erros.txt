@@ -1,0 +1,2 @@
+001 : nome inválido (possui algum caracter especial)
+002 : opção inválida (opção no menu não existe)
