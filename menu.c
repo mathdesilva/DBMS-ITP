@@ -9,19 +9,16 @@ int menu_principal(){
 		printf("  1 - Adicionar nova tabela\n");
 		printf("  2 - Adicionar nova linha/coluna\n");
 		printf("  3 - Mostrar tabela\n");
+		printf("  4 - Deletar tabela\n");
+		printf("  5 - Deletar linha/coluna\n");
 		printf("  0 - Sair\n");
 		printf("Escolha uma opção: ");
 		scanf("%d", &op);
 
 		if(op >= 0 && op <=3)
 			aux++;
-		else{
-			limpar();
-			printf("Erro 002 - opção inválida\n");
-			printf("Aperte ENTER para voltar\n");
-			getchar();
-			scanf("%c", &trash);
-		}
+		else
+			mostrar_erro(002);
 	}
 	limpar();
 
@@ -42,13 +39,8 @@ int menu_addcoluna(){
 
 		if(op >=0 && op <=1)
 			aux++;
-		else{
-			limpar();
-			printf("Erro 002 - opção inválida\n");
-			printf("Aperte ENTER para voltar\n");
-			getchar();
-			scanf("%c", &trash);
-		}
+		else
+			mostrar_erro(002);
 	}
 	limpar();
 	
@@ -72,19 +64,10 @@ int menu_tipo(){
 
 		if(op >= 1 && op <= 5)
 			aux++;
-		else {
-			limpar();
-			printf("Erro 002 - opção inválida\n");
-			printf("Aperte ENTER para voltar\n");
-			getchar();
-			scanf("%c", &trash);
-		}
+		else
+			mostrar_erro(002);
 	}
 	limpar();
 
 	return op;
-}
-
-void limpar(){
-	system("clear");
 }

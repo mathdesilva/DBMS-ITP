@@ -3,9 +3,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-
-// Limpar a tela
-void limpar();
+#include "geral.h"
 
 // Mostra o menu principal e retorna a opção escolhida
 int menu_principal();

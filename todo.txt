@@ -1,4 +1,3 @@
- - Arrumar menu com verificador
  - Criar modelo de tabela
  - Diferenciar os tipos das colunas
  - comentar todo o código
