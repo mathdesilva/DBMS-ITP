@@ -1,4 +1,0 @@
-t1.txt
-t2.txt
-lucas.txt
-man.txt
