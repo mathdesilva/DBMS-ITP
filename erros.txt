@@ -1,5 +1,7 @@
-001 : nome inválido (possui algum caracter especial)
-002 : opção inválida (opção no menu não existe)
-003 : tabela já existente (arquivo da tabela já existe)
-004 : Arquivo tabelas.txt não encontrado (arquivo tabelas não existe)
-005 : arquivo não criado
+001 : nome inválido
+002 : opção inválida
+003 : tabela já existente
+004 : Arquivo tabelas.txt não encontrado
+005 : erro ao criar arquivo
+006 : tabela não existe
+007 : erro ao deletar tabela

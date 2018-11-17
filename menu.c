@@ -6,16 +6,17 @@ int menu_principal(){
 	while(aux == 0){
 		limpar();
 		printf("======= MENU PRINCIPAL =======\n");
-		printf("  1 - Adicionar nova tabela\n");
-		printf("  2 - Adicionar nova linha/coluna\n");
-		printf("  3 - Mostrar tabela\n");
-		printf("  4 - Deletar tabela\n");
-		printf("  5 - Deletar linha/coluna\n");
+		printf("  1 - Adicionar nova tabela (pronto)\n");
+		printf("  2 - Adicionar nova linha (fazendo)\n");
+		printf("  3 - Listar tabelas (pronto)\n");
+		printf("  4 - Pesquisar (fazendo)\n");
+		printf("  5 - Deletar tabela (pronto)\n");
+		printf("  6 - Deletar linha (fazendo)\n");
 		printf("  0 - Sair\n");
 		printf("Escolha uma opção: ");
 		scanf("%d", &op);
 
-		if(op >= 0 && op <=3)
+		if(op >= 0 && op <=6)
 			aux++;
 		else
 			mostrar_erro(002);

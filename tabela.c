@@ -20,6 +20,7 @@ int add_tabela(){
 	}
 
 	// verificar se a tabela já existe
+	strcat(nome, ".txt");
 	if(verificar_existencia(nome) == 1){
 		mostrar_erro(003);
 		return 0;
@@ -30,7 +31,6 @@ int add_tabela(){
 	}
 
 	// criando um novo arquivo
-	strcat(nome, ".txt");
 	FILE * arq = fopen(nome, "w");
 	if(arq == NULL){
 		mostrar_erro(005);
@@ -61,6 +61,8 @@ int add_tabela(){
 		add_coluna(nome);
 		op = menu_addcoluna();
 	}
+
+	return 0;
 }
 
 int add_coluna(char nome[60]){
@@ -72,6 +74,91 @@ int add_coluna(char nome[60]){
 	// TODO: add chave primaria
 
 	FILE * arq = fopen(nome, "w");
+
+	fclose(arq);
+}
+
+int del_tabela(){
+	char nome[60], trash;
+
+	//listar todas as tabelas existentes
+ 	if(listar_tabelas() == 2)
+		return 0;
+
+	// pegar a tabela a ser deletada
+	printf("escreva o nome da tabela para ser deletada: ");
+	scanf("%s", nome);
+	strcat(nome, ".txt");
+
+	// verificar existencia da tabela
+	if(verificar_existencia(nome) == 0){
+		mostrar_erro(006);
+		return 0;
+	} 
+	// caso retorne erro
+	else if(verificar_existencia(nome) == 2)
+		return 0;
+
+	// deletando do tabelas.txt
+	char swap[60];
+	FILE *aux = fopen("auxiliar.txt", "w");
+	if(aux == NULL){
+		mostrar_erro(007);
+		return 0;
+	}
+	FILE *arq = fopen("tabelas.txt", "r");
+	if(arq == NULL){
+		mostrar_erro(004);
+		remove("auxiliar.txt");
+		return 0;
+	}
+	while(fscanf(arq, "%s", swap) != EOF){
+		if(strcmp(nome, swap) != 0)
+			fprintf(aux, "%s\n", swap);
+	}
+	fclose(aux);
+	fclose(arq);
+	remove("tabelas.txt");
+	rename("auxiliar.txt", "tabelas.txt");
+
+	// deletando tabela
+	remove(nome);
+
+	limpar();
+	printf("tabela deletada com sucesso\n");
+	printf("Aperte ENTER para voltar\n");
+	getchar();
+	scanf("%c", &trash);
+	limpar();
+
+}
+
+int listar_todas_tabelas(){
+	char trash;
+	limpar();
+	listar_tabelas();
+	printf("Aperte ENTER para voltar\n");
+	getchar();
+	scanf("%c", &trash);
+	limpar();
+}
+
+int listar_tabelas(){
+	FILE *arq = fopen("tabelas.txt", "r");
+	char nome[60];
+	int tamanho;
+	if(arq == NULL){
+		mostrar_erro(004);
+		return 2;
+	}
+
+	printf("======= TABELAS =======\n");
+	while(fscanf(arq, "%s", nome) != EOF){
+		tamanho = strlen(nome);
+		char saida[60] = "";
+		strncpy(saida, nome, tamanho - 4);
+		printf("  - %s\n", saida);
+	}
 
 	fclose(arq);
 }

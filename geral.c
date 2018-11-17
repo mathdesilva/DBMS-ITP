@@ -18,8 +18,13 @@ void mostrar_erro(int codigo){
 			fprintf(stderr, "Erro 004: arquivo tabelas.txt não encontrado\n");
 			break;
 		case 005:
-			fprintf(stderr, "Erro 005: arquivo não criado\n");
+			fprintf(stderr, "Erro 005: erro ao criar arquivo\n");
 			break;
+		case 006:
+			fprintf(stderr, "Erro 006: tabela não existe\n");
+			break;
+		case 007:
+			fprintf(stderr, "Erro 007: erro ao deletar tabela\n");
 	}
 
 	printf("Aperte ENTER para voltar\n");

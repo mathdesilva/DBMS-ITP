@@ -14,10 +14,14 @@ int main(){
 			case 2: // adicionar linha/coluna
 				break;
 			case 3: // mostrar tabela
+				listar_todas_tabelas();
 				break;
-			case 4: // deletar tabela
+			case 4: // pesquisar
 				break;
-			case 5: // deletar linha/coluna
+			case 5: // deletar tabela
+				del_tabela();
+				break;
+			case 6: // deletar linha/coluna
 				break;
 			case 0: // sair
 				break;
