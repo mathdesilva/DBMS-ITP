@@ -11,9 +11,9 @@ int main(){
 			case 1: // adicionar tabela
 				add_tabela();
 				break;
-			case 2: // adicionar linha/coluna
+			case 2: // adicionar linha
 				break;
-			case 3: // mostrar tabela
+			case 3: // mostrar tabelas
 				listar_todas_tabelas();
 				break;
 			case 4: // pesquisar
@@ -21,7 +21,7 @@ int main(){
 			case 5: // deletar tabela
 				del_tabela();
 				break;
-			case 6: // deletar linha/coluna
+			case 6: // deletar linha
 				break;
 			case 0: // sair
 				break;

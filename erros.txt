@@ -1,7 +1,9 @@
-001 : nome inválido
-002 : opção inválida
-003 : tabela já existente
-004 : Arquivo tabelas.txt não encontrado
-005 : erro ao criar arquivo
-006 : tabela não existe
-007 : erro ao deletar tabela
+1 : nome inválido
+2 : opção inválida
+3 : tabela já existente
+4 : Arquivo tabelas.txt não encontrado
+5 : erro ao criar arquivo
+6 : tabela não existe
+7 : erro ao deletar tabela
+8 : chave primária não adicionada
+9 : coluna já existe

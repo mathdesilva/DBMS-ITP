@@ -2,7 +2,6 @@
 
 int menu_principal(){
 	int op, aux = 0;
-	char trash;
 	while(aux == 0){
 		limpar();
 		printf("======= MENU PRINCIPAL =======\n");
@@ -19,7 +18,7 @@ int menu_principal(){
 		if(op >= 0 && op <=6)
 			aux++;
 		else
-			mostrar_erro(002);
+			mostrar_erro(2);
 	}
 	limpar();
 
@@ -28,7 +27,6 @@ int menu_principal(){
 
 int menu_addcoluna(){
 	int op, aux=0;
-	char trash;
 	
 	while(aux == 0){
 		limpar();
@@ -41,7 +39,7 @@ int menu_addcoluna(){
 		if(op >=0 && op <=1)
 			aux++;
 		else
-			mostrar_erro(002);
+			mostrar_erro(2);
 	}
 	limpar();
 	
@@ -50,10 +48,8 @@ int menu_addcoluna(){
 
 int menu_tipo(){
 	int op, aux=0;
-	char trash;
 
 	while(aux == 0){
-		limpar();
 		printf("Tipo:\n");
 		printf("  1 - String\n");
 		printf("  2 - Char\n");
@@ -66,9 +62,29 @@ int menu_tipo(){
 		if(op >= 1 && op <= 5)
 			aux++;
 		else
-			mostrar_erro(002);
+			mostrar_erro(2);
 	}
 	limpar();
 
+	return op;
+}
+
+int menu_chaveprimaria(){
+	int op, aux=0;
+
+	while(aux == 0){
+		printf("Esta coluna é uma chave primaria?\n");
+		printf("  1 - Sim\n");
+		printf("  0 - Não\n");
+		printf("Escolha uma opção: ");
+		scanf("%d", &op);
+
+		if(op == 0 || op == 1)
+			aux++;
+		else
+			mostrar_erro(2);
+	}
+	limpar();
+	
 	return op;
 }

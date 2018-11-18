@@ -7,11 +7,13 @@
 #include "menu.h"
 #include "geral.h"
 
-// alocar uma nova tabela
+// criar uma nova tabela
 int add_tabela();
 
-// alocar uma nova coluna
-int add_coluna(char nome[60]);
+// criar uma coluna
+// retorna 1 caso tenha adicionado chave primária
+// retorna 0 caso não tenha adicionado chave primária
+int add_coluna(FILE * arquivo, int chave_adicionada);
 
 // deletar uma tabela
 int del_tabela();

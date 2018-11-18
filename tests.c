@@ -1,11 +1,15 @@
 #include <stdio.h>
 
-int main(){
-	int a = 'a' + 0, z = 'z' + 0;
-	int A = 'A' + 0, Z = 'Z' + 0;
+void botar(FILE * txt){
+	fprintf(txt, "fala fiote");
+}
 
-	printf("a = %d\nz = %d\n", a, z);
-	printf("A = %d\nZ = %d\n", A, Z);
+int main(){
+	
+	FILE * arq = fopen("opa.txt", "w");
+	botar(arq);
+	botar(arq);
+	fclose(arq);
 
 	return 0;
 }

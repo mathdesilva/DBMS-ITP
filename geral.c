@@ -5,32 +5,53 @@ void mostrar_erro(int codigo){
 	limpar();
 
 	switch(codigo){
-		case 001:
-			fprintf(stderr, "Erro 001: nome inválido\n");
+		case 1:
+			fprintf(stderr, "Erro 1: nome inválido\n");
 			break;
-		case 002:
-			fprintf(stderr, "Erro 002: opção inválida\n");
+		case 2:
+			fprintf(stderr, "Erro 2: opção inválida\n");
 			break;
-		case 003:
-			fprintf(stderr, "Erro 003: tabela já existente\n");
+		case 3:
+			fprintf(stderr, "Erro 3: tabela já existente\n");
 			break;
-		case 004:
-			fprintf(stderr, "Erro 004: arquivo tabelas.txt não encontrado\n");
+		case 4:
+			fprintf(stderr, "Erro 4: arquivo tabelas.txt não encontrado\n");
 			break;
-		case 005:
-			fprintf(stderr, "Erro 005: erro ao criar arquivo\n");
+		case 5:
+			fprintf(stderr, "Erro 5: erro ao criar arquivo\n");
 			break;
-		case 006:
-			fprintf(stderr, "Erro 006: tabela não existe\n");
+		case 6:
+			fprintf(stderr, "Erro 6: tabela não existe\n");
 			break;
-		case 007:
-			fprintf(stderr, "Erro 007: erro ao deletar tabela\n");
+		case 7:
+			fprintf(stderr, "Erro 7: erro ao deletar tabela\n");
+			break;
+		case 8:
+			fprintf(stderr, "Erro 8: chave primária não adicionada\n");
+			break;
+		case 9:
+			fprintf(stderr, "Erro 9: coluna já existe\n");
+			break;
 	}
 
 	printf("Aperte ENTER para voltar\n");
 	getchar();
 	scanf("%c", &trash);
 	limpar();
+}
+
+int verificar_nome(char nome[60]){
+	int size = strlen(nome);
+	for(int i=0; i<size; i++){
+		if((nome[i] < '0' || nome[i] > '9') && 
+		(nome[i] < 'a' || nome[i] > 'z') && 
+		(nome[i] < 'A' || nome[i] > 'Z')){
+			mostrar_erro(1);
+			return 0;
+		}
+	}
+
+	return 1;
 }
 
 void limpar(){
