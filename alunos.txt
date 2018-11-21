@@ -1,3 +1,6 @@
 curso 1 nome 1 nota 4 *cpf 3 letrafav 2 |
-ti matheus 10.0 70010835423 a 
+ti matheus 10.0 70010010023 a 
 ti jessica 10.0 200200200 z 
+fisica joaopedro 10.0 1010101010 f 
+ti felipe 10.0 700700700700 b 
+mamada pedru 9.000 20202020 r 

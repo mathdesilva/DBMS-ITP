@@ -200,11 +200,20 @@ int add_linha(){
 	fclose(arq_aux);
 	fclose(arq);
 
-	// pegando os valores da linha
+	// pegando os valores da linha e colocando em buffer.txt
 	int numtipo;
 	char coluna[60];
 	arq_aux = fopen("auxiliar3.txt", "r");
-	arq = fopen(nome, "a");
+	if(arq_aux == NULL){
+		mostrar_erro(10);
+		return 0;
+	}
+	arq = fopen("buffer.txt", "w");
+	if(arq == NULL){
+		mostrar_erro(10);
+		remove("auxiliar3.txt");
+		return 0;
+	}
 	for(int i=0; i<num_col; i++){
 		if(i == (col_chavePrimaria-1)){
 			fscanf(arq_aux, "%s %d", coluna, &numtipo);
@@ -215,19 +224,39 @@ int add_linha(){
 			printf("Digite o valor de %s (%s): ", coluna, tipo(numtipo));
 			scanf("%s", valor);
 			if(verificar_valor(valor, numtipo) == 0){
-				// TODO: delete buffer and close
 				fclose(arq);
 				fclose(arq_aux);
+				remove("buffer.txt");
 				remove("auxiliar3.txt");
 				return 0;
 			}
 			fprintf(arq, "%s ", valor);
 		}
 	}
-	fprintf(arq, "\n");
 	fclose(arq);
 	fclose(arq_aux);
 	remove("auxiliar3.txt");
+	
+	// pega os valores de buffer.txt e coloca na tabela
+	arq = fopen(nome, "a");
+	if(arq == NULL){
+		mostrar_erro(10);
+		return 0;
+	}
+	arq_aux = fopen("buffer.txt", "r");
+	if(arq_aux == NULL){
+		mostrar_erro(10);
+		fclose(arq);
+		return 0;
+	}
+	while(fscanf(arq_aux, "%s", valor) != EOF)
+		fprintf(arq, "%s ", valor);
+	fprintf(arq, "\n");
+	fclose(arq);
+	fclose(arq_aux);
+	remove("buffer.txt");
+
+	return 0;
 }
 
 int del_tabela(){

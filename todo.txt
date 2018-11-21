@@ -16,6 +16,12 @@
  	ler valores e tratá-los de acordo com o tipo
  	botar valores no arquivo da tabela
 
+
+- Imprimir valores:
+	pesquisar em toda tabela
+	pesquisar em uma coluna
+
+	
  Anotações:
  - Tamanhos:
  	String: 60 char
