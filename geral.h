@@ -18,6 +18,10 @@ int verificar_nome(char nome[60]);
 // retorna 0 caso não for válido
 int verificar_valor(char valor[60], int tipo);
 
+// passar o número do tipo
+// retorna ponteiro de char com o nome do tipo
+char* tipo(int num);
+
 // limpar tela
 void limpar();
 

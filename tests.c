@@ -2,16 +2,28 @@
 #include <stdlib.h>
 #include <string.h>
 
-char* opa(){
-	char* retorno = "fala";
-	return (retorno);
+char* tipo(int num){
+	char* retorno;
+	switch(num){
+		case 1:
+			return "string";
+			break;
+		case 2:
+			return "char";
+			break;
+		case 3:
+			return "int";
+			break;
+		case 4:
+			return "float";
+			break;
+		case 5:
+			return "double";
+			break;
+	}
 }
 
 int main(){
-	char test[20];
-
-	strcpy(test, opa());
-
-	printf("%s\n", test);
+	printf("o tipo é %s\n", tipo(2));
 	return 0;
 }

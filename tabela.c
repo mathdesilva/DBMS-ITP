@@ -167,8 +167,10 @@ int add_linha(){
 		fscanf(arq, "%s %d", chavep, &num_aux);
 	chavep[0] = ' ';
 	limpar();
-	printf("Digite o valor de%s: ", chavep);
+	printf("Digite o valor de%s (int): ", chavep);
 	scanf("%s", chavep);
+	if(verificar_valor(chavep, 3) == 0)
+		return 0;
 
 	// validar chave primária
 	char valor[60];
@@ -184,14 +186,48 @@ int add_linha(){
 			fscanf(arq, "%s", valor);
 	}
 	
-	//criar arquivo auxiliar
+	// criar arquivo auxiliar e passando os nomes das colunas
 	rewind(arq);
 	FILE * arq_aux = fopen("auxiliar3.txt", "w");
 	if(arq_aux == NULL){
 		mostrar_erro(5);
 		return 0;
 	}
-	
+	for(int i=0; i<num_col*2; i++){
+		fscanf(arq, "%s", valor);
+		fprintf(arq_aux, "%s ", valor);
+	}
+	fclose(arq_aux);
+	fclose(arq);
+
+	// pegando os valores da linha
+	int numtipo;
+	char coluna[60];
+	arq_aux = fopen("auxiliar3.txt", "r");
+	arq = fopen(nome, "a");
+	for(int i=0; i<num_col; i++){
+		if(i == (col_chavePrimaria-1)){
+			fscanf(arq_aux, "%s %d", coluna, &numtipo);
+			fprintf(arq, "%s ", chavep);
+		}
+		else{
+			fscanf(arq_aux, "%s %d", coluna, &numtipo);
+			printf("Digite o valor de %s (%s): ", coluna, tipo(numtipo));
+			scanf("%s", valor);
+			if(verificar_valor(valor, numtipo) == 0){
+				// TODO: delete buffer and close
+				fclose(arq);
+				fclose(arq_aux);
+				remove("auxiliar3.txt");
+				return 0;
+			}
+			fprintf(arq, "%s ", valor);
+		}
+	}
+	fprintf(arq, "\n");
+	fclose(arq);
+	fclose(arq_aux);
+	remove("auxiliar3.txt");
 }
 
 int del_tabela(){

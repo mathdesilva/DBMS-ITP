@@ -13,7 +13,7 @@
  	validar chave primaria
  	criar arquivo auxiliar1
  	passar nome das colunas para auxliar1
- 	ler valores e tratálos de acordo com o tipo
+ 	ler valores e tratá-los de acordo com o tipo
  	botar valores no arquivo da tabela
 
  Anotações:
@@ -21,5 +21,5 @@
  	String: 60 char
  	char: hehe
  	int: só numeros
- 	float: só numeros e ponto ou virgula (trocar , por .)
- 	double: só numeros e ponto ou virgula (trocar , por .)
+ 	float: só numeros e ponto
+ 	double: só numeros e ponto

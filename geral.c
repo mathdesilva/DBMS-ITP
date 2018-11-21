@@ -41,6 +41,12 @@ void mostrar_erro(int codigo){
 		case 12:
 			fprintf(stderr, "Erro 12: valor já existente na tabela\n");
 			break;
+		case 13:
+			fprintf(stderr, "Erro 13: valor não compatível ao tipo\n");
+			break;
+		case 14:
+			fprintf(stderr, "Erro 14: sistema operacional não suportado\n");
+			break;
 	}
 
 	printf("Aperte ENTER para voltar");
@@ -64,20 +70,81 @@ int verificar_nome(char nome[60]){
 }
 
 int verificar_valor(char nome[60], int tipo){
+	int size, numOfPoints;
+	size = strlen(nome);
+
 	switch(tipo){
 		case 1: // String
 			break;
 		case 2: // char
+			if(strlen(nome) != 1){
+				mostrar_erro(13);
+				return 0;
+			}
 			break;
 		case 3: // int
+			for(int i=0; i<size; i++){
+				if(nome[i] < '0' || nome[i] > '9'){
+					mostrar_erro(13);
+					return 0;
+				}
+			}
 			break;
 		case 4: // float
-			break;
 		case 5: // double
+			if(size < 3 || nome[0] == '.' || nome[size-1] == '.'){
+				mostrar_erro(13);
+				return 0;
+			}
+			for(int i=0; i<size; i++){
+				if((nome[i] < '0' || nome[i] > '9') && nome[i] != '.'){
+					mostrar_erro(13);
+					return 0;
+				}
+			}
+			break;
+	}
+
+	return 1;
+}
+
+char* tipo(int num){
+	char* retorno;
+	switch(num){
+		case 1:
+			return "string";
+			break;
+		case 2:
+			return "char";
+			break;
+		case 3:
+			return "int";
+			break;
+		case 4:
+			return "float";
+			break;
+		case 5:
+			return "double";
 			break;
 	}
 }
 
 void limpar(){
-	system("clear");
+	#ifdef LINUX
+		system("clear");
+	#elif defined uns
+		system("clear");
+	#elif defined linux
+		system("clear");
+	#elif defined Linux
+		system("clear");
+	#elif defined WIN32
+		system("cls");
+	#elif defined win32
+		system("cls");
+	#elif defined Win32
+		system("cls");
+	#else
+		mostrar_erro(14);
+	#endif
 }
