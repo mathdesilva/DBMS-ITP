@@ -8,6 +8,11 @@ int add_tabela(){
 	printf("Nome da tabela (letras e numeros): ");
 	scanf("%s", nome);	
 	
+	// verificar tamanho da string
+	if(strlen(nome) > 54){
+		mostrar_erro(1);
+		return 0;
+	}
 	// verificar se o nome não possui caracteres especiais
 	if(verificar_nome(nome) == 0)
 		return 0;

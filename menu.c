@@ -5,11 +5,11 @@ int menu_principal(){
 	while(aux == 0){
 		limpar();
 		printf("======= MENU PRINCIPAL =======\n");
-		printf("  1 - Adicionar nova tabela (pronto)\n");
-		printf("  2 - Adicionar nova linha  (fazendo)\n");
-		printf("  3 - Listar tabelas        (pronto)\n");
+		printf("  1 - Adicionar nova tabela \n");
+		printf("  2 - Adicionar nova linha  \n");
+		printf("  3 - Listar tabelas        \n");
 		printf("  4 - Pesquisar             (fazendo)\n");
-		printf("  5 - Deletar tabela        (pronto)\n");
+		printf("  5 - Deletar tabela        \n");
 		printf("  6 - Deletar linha         (fazendo)\n");
 		printf("  0 - Sair\n");
 		printf("Escolha uma opção: ");
