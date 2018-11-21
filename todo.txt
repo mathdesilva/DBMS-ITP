@@ -1,3 +1,25 @@
  - Criar modelo de tabela
  - Diferenciar os tipos das colunas
  - comentar todo o código
+
+
+ Ideias:
+ - add_linhas():
+ 	pegar nome da tabela
+ 	verificar se existe
+ 	pegar posição da chave primaria
+ 	pegar numero de colunas
+ 	pegar valor chave primaria
+ 	validar chave primaria
+ 	criar arquivo auxiliar1
+ 	passar nome das colunas para auxliar1
+ 	ler valores e tratálos de acordo com o tipo
+ 	botar valores no arquivo da tabela
+
+ Anotações:
+ - Tamanhos:
+ 	String: 60 char
+ 	char: hehe
+ 	int: só numeros
+ 	float: só numeros e ponto ou virgula (trocar , por .)
+ 	double: só numeros e ponto ou virgula (trocar , por .)

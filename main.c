@@ -12,6 +12,7 @@ int main(){
 				add_tabela();
 				break;
 			case 2: // adicionar linha
+				add_linha();
 				break;
 			case 3: // mostrar tabelas
 				listar_todas_tabelas();

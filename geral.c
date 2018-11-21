@@ -32,9 +32,18 @@ void mostrar_erro(int codigo){
 		case 9:
 			fprintf(stderr, "Erro 9: coluna já existe\n");
 			break;
+		case 10:
+			fprintf(stderr, "Erro 10: erro ao abrir arquivo\n");
+			break;
+		case 11:
+			fprintf(stderr, "Erro 11: chave primária não encontrada\n");
+			break;
+		case 12:
+			fprintf(stderr, "Erro 12: valor já existente na tabela\n");
+			break;
 	}
 
-	printf("Aperte ENTER para voltar\n");
+	printf("Aperte ENTER para voltar");
 	getchar();
 	scanf("%c", &trash);
 	limpar();
@@ -52,6 +61,21 @@ int verificar_nome(char nome[60]){
 	}
 
 	return 1;
+}
+
+int verificar_valor(char nome[60], int tipo){
+	switch(tipo){
+		case 1: // String
+			break;
+		case 2: // char
+			break;
+		case 3: // int
+			break;
+		case 4: // float
+			break;
+		case 5: // double
+			break;
+	}
 }
 
 void limpar(){

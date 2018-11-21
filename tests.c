@@ -1,15 +1,17 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
-void botar(FILE * txt){
-	fprintf(txt, "fala fiote");
+char* opa(){
+	char* retorno = "fala";
+	return (retorno);
 }
 
 int main(){
-	
-	FILE * arq = fopen("opa.txt", "w");
-	botar(arq);
-	botar(arq);
-	fclose(arq);
+	char test[20];
 
+	strcpy(test, opa());
+
+	printf("%s\n", test);
 	return 0;
 }

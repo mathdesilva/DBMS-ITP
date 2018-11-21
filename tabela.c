@@ -69,7 +69,7 @@ int add_tabela(){
 			mostrar_erro(8);
 		}
 	}
-	fprintf(arq, "\n");
+	fprintf(arq, "|\n");
 	fclose(arq);
 	remove("auxiliar2.txt");
 
@@ -126,6 +126,72 @@ int add_coluna(FILE * arquivo, int chave_adicionada){
 		fprintf(arquivo, "%s %d ", titulo, op);
 		return 0;
 	}
+}
+
+int add_linha(){
+	char nome[60];
+
+	// pegar o nome da tabela
+	listar_tabelas();
+	printf("Digite o nome da tabela: ");
+	scanf("%s", nome);
+	strcat(nome, ".txt");
+
+	// verificar se o arquivo existe
+	if(verificar_existencia(nome) == 0){
+		mostrar_erro(6);
+		return 0;
+	}
+	else if(verificar_existencia(nome) == 2)
+		return 0;
+
+	// pegar posição da coluna da cheva primária
+	int col_chavePrimaria = pegar_chave_primaria(nome);
+	if(col_chavePrimaria == -1)
+		return 0;
+
+	// pegar número de colunas da tabela
+	int num_col = num_colunas(nome);
+	if(num_col == -1)
+		return 0;
+
+	// pegar valor da chave primária
+	char chavep[60];
+	int num_aux;
+	FILE * arq = fopen(nome, "r");
+	if(arq == NULL){
+		mostrar_erro(10);
+		return 0;
+	}
+	for(int i=0; i<col_chavePrimaria; i++)
+		fscanf(arq, "%s %d", chavep, &num_aux);
+	chavep[0] = ' ';
+	limpar();
+	printf("Digite o valor de%s: ", chavep);
+	scanf("%s", chavep);
+
+	// validar chave primária
+	char valor[60];
+	rewind(arq);
+	for(int i=0; i<(2*num_col)+col_chavePrimaria; i++)
+		fscanf(arq, "%s", valor);
+	while(fscanf(arq, "%s", valor) != EOF){
+		if(strcmp(valor, chavep) == 0){
+			mostrar_erro(12);
+			return 0;
+		}
+		for(int i=0; i<num_col-1; i++)
+			fscanf(arq, "%s", valor);
+	}
+	
+	//criar arquivo auxiliar
+	rewind(arq);
+	FILE * arq_aux = fopen("auxiliar3.txt", "w");
+	if(arq_aux == NULL){
+		mostrar_erro(5);
+		return 0;
+	}
+	
 }
 
 int del_tabela(){
@@ -215,6 +281,11 @@ int listar_tabelas(){
 int verificar_existencia(char nome[60]){
 	FILE *arq = fopen("tabelas.txt", "r");
 	char trash;
+
+	int size = strlen(nome);
+	if(nome[size-4] != '.')
+		strcat(nome, ".txt");
+
 	if(arq == NULL){
 		mostrar_erro(4);
 		return 2;
@@ -228,4 +299,53 @@ int verificar_existencia(char nome[60]){
 	}
 	fclose(arq);
 	return 0;
+}
+
+int pegar_chave_primaria(char nome[60]){
+	char coluna[60];
+	int counter = 0, aux;
+
+	// abrindo arquivo
+	FILE * arq = fopen(nome, "r");
+	if(arq == NULL){
+		mostrar_erro(10);
+		return -1;
+	}
+
+	// procurando chave primaria
+	while(fscanf(arq, "%s %d", coluna, &aux) != EOF){
+		if(coluna[0] == '*'){
+			fclose(arq);
+			return counter+1;
+		}
+		else
+			counter++;
+	}
+
+	// caso não ache a chave primaria
+	fclose(arq);
+	mostrar_erro(11);
+	return -1;
+}
+
+int num_colunas(char nome[60]){
+	char valor[60];
+	int counter = 0, aux;
+
+	// abrindo o arquivo
+	FILE * arq = fopen(nome, "r");
+	if(arq == NULL){
+		mostrar_erro(10);
+		return -1;
+	}
+
+	// contando o número de colunas
+	while(fscanf(arq, "%s", valor) != EOF && strcmp(valor, "|") != 0){
+		counter++;
+		fscanf(arq, "%d", &aux);
+	}
+
+	// fechando arquivo e retornando resultado
+	fclose(arq);
+	return counter;
 }
