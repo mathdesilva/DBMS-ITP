@@ -1,2 +1,0 @@
-escolas 1 *identificacao 3 numalunos 3 mediadenota 5 avaliacao 4 |
-hc 100000010 3000 7.234524 4.3 

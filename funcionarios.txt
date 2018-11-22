@@ -1,2 +1,0 @@
-nome 1 dataDeEntrada 1 *cpf 3 cargo 1 salario 4 |
-Luiz 20/20/20 70070020200 estudante 20.00 

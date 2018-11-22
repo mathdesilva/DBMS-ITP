@@ -1,3 +1,0 @@
-alunos.txt
-escola.txt
-funcionarios.txt

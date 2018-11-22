@@ -21,9 +21,9 @@ int main(){
 				listar_dados_tabelas();
 				break;
 			case 5: // pesquisar
-				del_tabela();
 				break;
 			case 6: // deletar tabela
+				del_tabela();
 				break;
 			case 7: // deletar linha
 				break;
