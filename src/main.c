@@ -4,6 +4,7 @@
 #include "../include/geral.h"
 
 int main(){
+	criar_arquivos_locais();
 	int op = menu_principal();
 	char trash;
 	while(op != 0){

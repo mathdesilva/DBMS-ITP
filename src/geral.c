@@ -148,3 +148,11 @@ void limpar(){
 		mostrar_erro(14);
 	#endif
 }
+
+void criar_arquivos_locais(){
+	FILE * arq = fopen("tabelas.txt", "r");
+	if(arq == NULL){
+		arq = fopen("tabelas.txt", "w");
+		fclose(arq);
+	}
+}

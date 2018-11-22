@@ -30,3 +30,6 @@ $(OBJ_DIR)/geral.o: $(SRC_DIR)/geral.c $(INC_DIR)/geral.h
 
 clean:
 	rm -r obj/ bin/*
+
+cleanall:
+	rm -r obj/ bin/* *.txt

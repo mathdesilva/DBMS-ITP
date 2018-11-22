@@ -25,4 +25,7 @@ char* tipo(int num);
 // limpar tela
 void limpar();
 
+// cria os arquivos locais
+void criar_arquivos_locais();
+
 #endif
