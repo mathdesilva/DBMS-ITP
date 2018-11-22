@@ -3,7 +3,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include "geral.h"
+#include "../include/geral.h"
 
 // Mostra o menu principal e retorna a opção escolhida
 int menu_principal();

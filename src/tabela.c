@@ -1,4 +1,4 @@
-#include "tabela.h"
+#include "../include/tabela.h"
 
 int add_tabela(){
 	char nome[60], trash;

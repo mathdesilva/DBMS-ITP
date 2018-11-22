@@ -1,7 +1,7 @@
 #include  <stdio.h>
-#include "menu.h"
-#include "tabela.h"
-#include "geral.h"
+#include "../include/menu.h"
+#include "../include/tabela.h"
+#include "../include/geral.h"
 
 int main(){
 	int op = menu_principal();

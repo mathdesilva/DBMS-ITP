@@ -1,4 +1,4 @@
-#include "geral.h"
+#include "../include/geral.h"
 
 void mostrar_erro(int codigo){
 	char trash;

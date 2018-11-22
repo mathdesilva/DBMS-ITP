@@ -1,4 +1,4 @@
-#include "menu.h"
+#include "../include/menu.h"
 
 int menu_principal(){
 	int op, aux = 0;

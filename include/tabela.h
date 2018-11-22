@@ -4,8 +4,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "menu.h"
-#include "geral.h"
+#include "../include/menu.h"
+#include "../include/geral.h"
 
 //criar uma nova tabela
 int add_tabela();

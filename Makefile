@@ -1,23 +1,25 @@
+#Pastas
+INC_DIR = ./include
+SRC_DIR = ./src
+
+#Variaveis
+CC = gcc
+CFLAGS = -Wall -Wextra
 
 output: main.o menu.o tabela.o geral.o
-	gcc main.o menu.o tabela.o geral.o -o dbms_itp
+	$(CC) $(CFLAGS) main.o menu.o tabela.o geral.o -o dbms_itp
 
-main.o: main.c
-	gcc -W -c main.c
+main.o: $(SRC_DIR)/main.c
+	$(CC) -c $(SRC_DIR)/main.c $(CFLAGS)
 
-menu.o: menu.c menu.h
-	gcc -W -c menu.c
+menu.o: $(SRC_DIR)/menu.c $(INC_DIR)/menu.h
+	$(CC) -c $(SRC_DIR)/menu.c $(CFLAGS)
 
-tabela.o: tabela.c tabela.h
-	gcc -W -c tabela.c
+tabela.o: $(SRC_DIR)/tabela.c $(INC_DIR)/tabela.h
+	$(CC) -c $(SRC_DIR)/tabela.c $(CFLAGS)
 
-geral.o: geral.c geral.h
-	gcc -W -c geral.c
+geral.o: $(SRC_DIR)/geral.c $(INC_DIR)/geral.h
+	$(CC) -c $(SRC_DIR)/geral.c $(CFLAGS)
 
 clean:
 	rm *.o dbms_itp
-
-test:
-	gcc -W tests.c -o test
-	./test
-	rm test
