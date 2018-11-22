@@ -1,25 +1,32 @@
 #Pastas
 INC_DIR = ./include
 SRC_DIR = ./src
+OBJ_DIR = ./obj
+BIN_DIR = ./bin
 
 #Variaveis
 CC = gcc
 CFLAGS = -Wall -Wextra
 
-output: main.o menu.o tabela.o geral.o
-	$(CC) $(CFLAGS) main.o menu.o tabela.o geral.o -o dbms_itp
+output: $(OBJ_DIR)/main.o $(OBJ_DIR)/menu.o $(OBJ_DIR)/tabela.o $(OBJ_DIR)/geral.o
+	mkdir -p bin
+	$(CC) $(CFLAGS) $(OBJ_DIR)/main.o $(OBJ_DIR)/menu.o $(OBJ_DIR)/tabela.o $(OBJ_DIR)/geral.o -o $(BIN_DIR)/dbms_itp
 
-main.o: $(SRC_DIR)/main.c
-	$(CC) -c $(SRC_DIR)/main.c $(CFLAGS)
+$(OBJ_DIR)/main.o: $(SRC_DIR)/main.c
+	mkdir -p obj
+	$(CC) -c $(SRC_DIR)/main.c -o $(OBJ_DIR)/main.o $(CFLAGS)
 
-menu.o: $(SRC_DIR)/menu.c $(INC_DIR)/menu.h
-	$(CC) -c $(SRC_DIR)/menu.c $(CFLAGS)
+$(OBJ_DIR)/menu.o: $(SRC_DIR)/menu.c $(INC_DIR)/menu.h
+	mkdir -p obj
+	$(CC) -c $(SRC_DIR)/menu.c -o $(OBJ_DIR)/menu.o $(CFLAGS)
 
-tabela.o: $(SRC_DIR)/tabela.c $(INC_DIR)/tabela.h
-	$(CC) -c $(SRC_DIR)/tabela.c $(CFLAGS)
+$(OBJ_DIR)/tabela.o: $(SRC_DIR)/tabela.c $(INC_DIR)/tabela.h
+	mkdir -p obj
+	$(CC) -c $(SRC_DIR)/tabela.c -o $(OBJ_DIR)/tabela.o $(CFLAGS)
 
-geral.o: $(SRC_DIR)/geral.c $(INC_DIR)/geral.h
-	$(CC) -c $(SRC_DIR)/geral.c $(CFLAGS)
+$(OBJ_DIR)/geral.o: $(SRC_DIR)/geral.c $(INC_DIR)/geral.h
+	mkdir -p obj
+	$(CC) -c $(SRC_DIR)/geral.c -o $(OBJ_DIR)/geral.o $(CFLAGS)
 
 clean:
-	rm *.o dbms_itp
+	rm -r obj/ bin/*
