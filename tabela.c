@@ -348,6 +348,64 @@ int listar_tabelas(){
 	fclose(arq);
 }
 
+int listar_dados_tabelas(){
+	int num_col;
+	char nome[60];
+
+	// pegar nome da tabela
+	listar_tabelas();
+	printf("Digite o nome da tabela a ser listada: ");
+	scanf("%s", nome);
+	strcat(nome, ".txt");
+	limpar();
+
+	// pegar numero de colunas
+	num_col = num_colunas(nome);
+
+	// verificando existencia
+	if(verificar_existencia(nome) == 0){
+		mostrar_erro(6);
+		return 0;
+	}
+	else if(verificar_existencia(nome) == 2)
+		return 0;
+
+	// printando os titulos das colunas
+	char valor[60];
+	int tipo;
+	FILE * arq = fopen(nome, "r");
+	if(arq == NULL){
+		mostrar_erro(10);
+		return 0;
+	}
+	for(int i=0; i<num_col; i++){
+		fscanf(arq, "%s %d", valor, &tipo);
+		printf("%s ", valor);
+	}
+	printf("\n");
+	fscanf(arq, "%s", valor);
+
+	// printando os valores da tabela
+	int aux = 0;
+	while(fscanf(arq, "%s", valor) != EOF){
+		printf("%s ", valor);
+		aux++;
+		if(aux%num_col == 0)
+			printf("\n");
+	}
+
+	// fechando o arquivo da tabela
+	fclose(arq);
+
+	// finalizar
+	char trash;
+	printf("Aperte ENTER para voltar");
+	getchar();
+	scanf("%c", &trash);
+	limpar();
+	return 0;
+}
+
 int verificar_existencia(char nome[60]){
 	FILE *arq = fopen("tabelas.txt", "r");
 	char trash;

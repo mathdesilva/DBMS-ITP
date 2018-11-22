@@ -7,10 +7,11 @@ int menu_principal(){
 		printf("======= MENU PRINCIPAL =======\n");
 		printf("  1 - Adicionar nova tabela \n");
 		printf("  2 - Adicionar nova linha  \n");
-		printf("  3 - Listar tabelas        \n");
-		printf("  4 - Pesquisar             (fazendo)\n");
-		printf("  5 - Deletar tabela        \n");
-		printf("  6 - Deletar linha         (fazendo)\n");
+		printf("  3 - Listar tabelas existentes\n");
+		printf("  4 - Mostra dados de tabela\n");
+		printf("  5 - Pesquisar dado        (fazendo)\n");
+		printf("  6 - Deletar tabela        \n");
+		printf("  7 - Deletar linha         (fazendo)\n");
 		printf("  0 - Sair\n");
 		printf("Escolha uma opção: ");
 		scanf("%d", &op);
@@ -45,6 +46,7 @@ int menu_addcoluna(){
 	
 	return op;
 }
+
 
 int menu_tipo(){
 	int op, aux=0;

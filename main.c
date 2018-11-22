@@ -17,12 +17,15 @@ int main(){
 			case 3: // mostrar tabelas
 				listar_todas_tabelas();
 				break;
-			case 4: // pesquisar
+			case 4: // mostrar dados de tabela
+				listar_dados_tabelas();
 				break;
-			case 5: // deletar tabela
+			case 5: // pesquisar
 				del_tabela();
 				break;
-			case 6: // deletar linha
+			case 6: // deletar tabela
+				break;
+			case 7: // deletar linha
 				break;
 			case 0: // sair
 				break;

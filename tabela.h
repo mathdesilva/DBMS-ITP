@@ -27,6 +27,9 @@ int listar_todas_tabelas();
 // lista todas as tabelas criadas
 int listar_tabelas();
 
+// lista todos os dados de uma tabela
+int listar_dados_tabelas();
+
 // se o arquivo já existe retorna 1
 // retorna 0 se o arquivo não existir (2 se der erro)
 int verificar_existencia(char nome[60]);
