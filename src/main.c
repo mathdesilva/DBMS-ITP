@@ -6,7 +6,6 @@
 int main(){
 	criar_arquivos_locais();
 	int op = menu_principal();
-	char trash;
 	while(op != 0){
 		switch(op){
 			case 1: // adicionar tabela

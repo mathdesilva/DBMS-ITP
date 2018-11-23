@@ -28,4 +28,10 @@ void limpar();
 // cria os arquivos locais
 void criar_arquivos_locais();
 
+// printa uma string em maiúsculo
+void printar_uppercase(char name[60]);
+
+// printa o numero de espaços que foi definido
+void tab(int num);
+
 #endif

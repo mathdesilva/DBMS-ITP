@@ -47,6 +47,12 @@ void mostrar_erro(int codigo){
 		case 14:
 			fprintf(stderr, "Erro 14: sistema operacional não suportado\n");
 			break;
+		case 15:
+			fprintf(stderr, "Erro 15: erro ao procurar coluna\n");
+			break;
+		case 16:
+			fprintf(stderr, "Erro 16: memória insuficiente\n");
+			break;
 	}
 
 	printf("Aperte ENTER para voltar");
@@ -70,7 +76,7 @@ int verificar_nome(char nome[60]){
 }
 
 int verificar_valor(char nome[60], int tipo){
-	int size, numOfPoints;
+	int size;
 	size = strlen(nome);
 
 	switch(tipo){
@@ -109,7 +115,6 @@ int verificar_valor(char nome[60], int tipo){
 }
 
 char* tipo(int num){
-	char* retorno;
 	switch(num){
 		case 1:
 			return "string";
@@ -128,6 +133,7 @@ char* tipo(int num){
 			break;
 	}
 }
+
 
 void limpar(){
 	#ifdef LINUX
@@ -155,4 +161,20 @@ void criar_arquivos_locais(){
 		arq = fopen("tabelas.txt", "w");
 		fclose(arq);
 	}
+}
+
+void printar_uppercase(char name[60]){
+	while(*name != '\0'){
+		if(*name >= 'a' && *name <= 'z'){
+			printf("%c", (*name)-32);
+		} else {
+			printf("%c", *name);
+		}
+		name++;
+	}
+}
+
+void tab(int num){
+	for(int i=0; i<num; i++)
+		printf(" ");
 }

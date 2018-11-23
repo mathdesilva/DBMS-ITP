@@ -316,9 +316,11 @@ int del_tabela(){
 	getchar();
 	scanf("%c", &trash);
 	limpar();
+
+	return 0;
 }
 
-int listar_todas_tabelas(){
+void listar_todas_tabelas(){
 	char trash;
 	limpar();
 	listar_tabelas();
@@ -346,6 +348,8 @@ int listar_tabelas(){
 	}
 
 	fclose(arq);
+
+	return 0;
 }
 
 int listar_dados_tabelas(){
@@ -361,6 +365,8 @@ int listar_dados_tabelas(){
 
 	// pegar numero de colunas
 	num_col = num_colunas(nome);
+	if(num_col == -1)
+		return 0;
 
 	// verificando existencia
 	if(verificar_existencia(nome) == 0){
@@ -370,7 +376,7 @@ int listar_dados_tabelas(){
 	else if(verificar_existencia(nome) == 2)
 		return 0;
 
-	// printando os titulos das colunas
+	// clonando tabela em outro arquivo "clone.txt"
 	char valor[60];
 	int tipo;
 	FILE * arq = fopen(nome, "r");
@@ -378,9 +384,35 @@ int listar_dados_tabelas(){
 		mostrar_erro(10);
 		return 0;
 	}
+	FILE * clone = fopen("clone.txt", "w");
+	if(arq == NULL){
+		mostrar_erro(10);
+		fclose(arq);
+		return 0;
+	}
+	while(fscanf(arq, "%s", valor) != EOF)
+		fprintf(clone, "%s ", valor);
+	fclose(clone);
+
+	// alocando o tamanho das maiores strings de cada coluna
+	rewind(arq);
+	int *tamanhos = (int *) malloc(num_col * sizeof(int));
+	if(tamanhos == NULL){
+		mostrar_erro(16);
+		fclose(arq);
+		return 0;
+	}
 	for(int i=0; i<num_col; i++){
 		fscanf(arq, "%s %d", valor, &tipo);
-		printf("%s ", valor);
+		tamanhos[i] = maior_tamanho_coluna("clone.txt", valor);
+	}
+
+	// printando os titulos das colunas
+	rewind(arq);
+	for(int i=0; i<num_col; i++){
+		fscanf(arq, "%s %d", valor, &tipo);
+		printar_uppercase(valor);
+		tab(tamanhos[i] - strlen(valor) + 1);
 	}
 	printf("\n");
 	fscanf(arq, "%s", valor);
@@ -388,7 +420,8 @@ int listar_dados_tabelas(){
 	// printando os valores da tabela
 	int aux = 0;
 	while(fscanf(arq, "%s", valor) != EOF){
-		printf("%s ", valor);
+		printf("%s", valor);
+		tab(tamanhos[aux%num_col] - strlen(valor) + 1);
 		aux++;
 		if(aux%num_col == 0)
 			printf("\n");
@@ -396,6 +429,7 @@ int listar_dados_tabelas(){
 
 	// fechando o arquivo da tabela
 	fclose(arq);
+	free(tamanhos);
 
 	// finalizar
 	char trash;
@@ -408,7 +442,6 @@ int listar_dados_tabelas(){
 
 int verificar_existencia(char nome[60]){
 	FILE *arq = fopen("tabelas.txt", "r");
-	char trash;
 
 	int size = strlen(nome);
 	if(nome[size-4] != '.')
@@ -476,4 +509,73 @@ int num_colunas(char nome[60]){
 	// fechando arquivo e retornando resultado
 	fclose(arq);
 	return counter;
+}
+
+int num_posicao_coluna(char arquivo[60], char coluna[60]){
+	char valor[60];
+	int tipo, contador = 0;
+
+	// abrindo arquivo
+	FILE * arq = fopen(arquivo, "r");
+	if(arq == NULL){
+		mostrar_erro(10);
+		return -1;
+	}
+
+	// procurando coluna
+	while(fscanf(arq, "%s %d", valor, &tipo) != EOF){
+		contador++;
+		if(strcmp(coluna, valor) == 0){
+			fclose(arq);
+			return contador;
+		}
+	}
+
+	// em caso de erro na busca
+	fclose(arq);
+	mostrar_erro(15);
+	return -1;
+}
+
+int maior_tamanho_coluna(char arquivo[60], char coluna[60]){
+	int size, maior=0, tipo;
+	char valor[60];
+
+	// pegando o número de colunas da tabela
+	int num_col = num_colunas(arquivo);
+
+	// pegando a posição da coluna na tabela
+	int num_pos_coluna = num_posicao_coluna(arquivo, coluna);
+
+	// procurando maior valor
+	FILE * arq = fopen(arquivo, "r");
+	if(arq == NULL){
+		mostrar_erro(10);
+		return -1;
+	}
+	for(int i=0; i<num_pos_coluna-1; i++)
+		fscanf(arq, "%s %d", valor, &tipo);
+
+	fscanf(arq, "%s %d", valor, &tipo);
+	maior = strlen(valor);
+
+	for(int i=0; i<num_col - num_pos_coluna; i++)
+		fscanf(arq, "%s %d", valor, &tipo);
+
+	fscanf(arq, "%s", valor);
+
+	for(int i=0; i<num_pos_coluna-1; i++)
+		fscanf(arq, "%s", valor);
+
+	while(fscanf(arq, "%s", valor) != EOF){
+		size = strlen(valor);
+		if(size > maior)
+			maior = size;
+		for(int i=0; i<num_col-1; i++)
+			fscanf(arq, "%s", valor);
+	}
+	fclose(arq);
+
+	// retornando o maior tamanho
+	return maior;
 }

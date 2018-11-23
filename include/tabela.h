@@ -22,7 +22,7 @@ int add_linha();
 int del_tabela();
 
 // lista todas as tabelas e tem menu para voltar
-int listar_todas_tabelas();
+void listar_todas_tabelas();
 
 // lista todas as tabelas criadas
 int listar_tabelas();
@@ -42,5 +42,14 @@ int pegar_chave_primaria(char nome[60]);
 // retorna -1 em caso de erro
 int num_colunas(char nome[60]);
 
+// passar nome do arquivo (com ".txt") e o nome da coluna
+// retorna a posição da coluna na tabela
+// retorna -1 em caso de erro
+int num_posicao_coluna(char arquivo[60], char coluna[60]);
+
+// passar nome do arquivo (com ".txt") e o nome da coluna
+// retorna o tamanho da maior string da coluna
+// retorna -1 em caso de erro
+int maior_tamanho_coluna(char arquivo[60], char coluna[60]);
 
 #endif
