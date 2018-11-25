@@ -161,37 +161,52 @@ int add_linha(){
 		return 0;
 
 	// pegar valor da chave primária
-	char chavep[60];
-	int num_aux;
+	char nome_chavep[60], valor[60], chavep[60];
+	int num_aux, sair1=0;
 	FILE * arq = fopen(nome, "r");
 	if(arq == NULL){
 		mostrar_erro(10);
 		return 0;
 	}
 	for(int i=0; i<col_chavePrimaria; i++)
-		fscanf(arq, "%s %d", chavep, &num_aux);
-	chavep[0] = ' ';
-	limpar();
-	printf("Digite o valor de%s (int): ", chavep);
-	scanf("%s", chavep);
-	if(verificar_valor(chavep, 3) == 0)
-		return 0;
-
-	// validar chave primária
-	char valor[60];
-	rewind(arq);
-	for(int i=0; i<(2*num_col)+col_chavePrimaria; i++)
-		fscanf(arq, "%s", valor);
-	while(fscanf(arq, "%s", valor) != EOF){
-		if(strcmp(valor, chavep) == 0){
-			mostrar_erro(12);
-			return 0;
+		fscanf(arq, "%s %d", nome_chavep, &num_aux);
+	nome_chavep[0] = ' ';
+	while(sair1 == 0){
+		limpar();
+		printf("Digite o valor de%s (int): ", nome_chavep);
+		scanf("%s", chavep);
+		if(verificar_valor(chavep, 3) == 0){
+			if(menu_continuar() == 0)
+				return 0;
+			else
+				continue;
 		}
-		for(int i=0; i<num_col-1; i++)
+			
+		// validar chave primária
+		rewind(arq);
+		for(int i=0; i<(2*num_col)+col_chavePrimaria; i++)
 			fscanf(arq, "%s", valor);
+		while(fscanf(arq, "%s", valor) != EOF){
+			if(strcmp(valor, chavep) == 0){
+				mostrar_erro(12);
+				if(menu_continuar() == 0)
+					return 0;
+				else{
+					sair1 = 1;
+					break;
+				}
+			}
+			for(int i=0; i<num_col-1; i++)
+					fscanf(arq, "%s", valor);
+		}
+		if(sair1 == 1){
+			sair1 = 0;
+			continue;
+		}
+		sair1 = 1;
 	}
-	
-	// criar arquivo auxiliar e passando os nomes das colunas
+
+	// criando arquivo auxiliar e passando os nomes das colunas
 	rewind(arq);
 	FILE * arq_aux = fopen("auxiliar3.txt", "w");
 	if(arq_aux == NULL){
@@ -208,6 +223,7 @@ int add_linha(){
 	// pegando os valores da linha e colocando em buffer.txt
 	int numtipo;
 	char coluna[60];
+	sair1 = 0;
 	arq_aux = fopen("auxiliar3.txt", "r");
 	if(arq_aux == NULL){
 		mostrar_erro(10);
@@ -226,14 +242,21 @@ int add_linha(){
 		}
 		else{
 			fscanf(arq_aux, "%s %d", coluna, &numtipo);
-			printf("Digite o valor de %s (%s): ", coluna, tipo(numtipo));
-			scanf("%s", valor);
-			if(verificar_valor(valor, numtipo) == 0){
-				fclose(arq);
-				fclose(arq_aux);
-				remove("buffer.txt");
-				remove("auxiliar3.txt");
-				return 0;
+			sair1 = 0;
+			while(sair1 == 0){
+				printf("Digite o valor de %s (%s): ", coluna, tipo(numtipo));
+				scanf("%s", valor);
+				if(verificar_valor(valor, numtipo) == 0){
+					if(menu_continuar() == 0){
+						fclose(arq);
+						fclose(arq_aux);
+						remove("buffer.txt");
+						remove("auxiliar3.txt");
+						return 0;
+					}
+				}
+				else
+					sair1 = 1;
 			}
 			fprintf(arq, "%s ", valor);
 		}
@@ -363,17 +386,17 @@ int listar_dados_tabelas(){
 	strcat(nome, ".txt");
 	limpar();
 
-	// pegar numero de colunas
-	num_col = num_colunas(nome);
-	if(num_col == -1)
-		return 0;
-
 	// verificando existencia
 	if(verificar_existencia(nome) == 0){
 		mostrar_erro(6);
 		return 0;
 	}
 	else if(verificar_existencia(nome) == 2)
+		return 0;
+
+	// pegar numero de colunas
+	num_col = num_colunas(nome);
+	if(num_col == -1)
 		return 0;
 
 	// clonando tabela em outro arquivo "clone.txt"
@@ -430,6 +453,7 @@ int listar_dados_tabelas(){
 	// fechando o arquivo da tabela
 	fclose(arq);
 	free(tamanhos);
+	remove("clone.txt");
 
 	// finalizar
 	char trash;

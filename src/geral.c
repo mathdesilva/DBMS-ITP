@@ -132,6 +132,8 @@ char* tipo(int num){
 			return "double";
 			break;
 	}
+
+	return "error";
 }
 
 

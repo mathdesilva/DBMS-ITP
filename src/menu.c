@@ -16,7 +16,7 @@ int menu_principal(){
 		printf("Escolha uma opção: ");
 		scanf("%d", &op);
 
-		if(op >= 0 && op <=6)
+		if(op >= 0 && op <=7)
 			aux++;
 		else
 			mostrar_erro(2);
@@ -78,6 +78,26 @@ int menu_chaveprimaria(){
 		printf("Esta coluna é uma chave primaria?\n");
 		printf("  1 - Sim\n");
 		printf("  0 - Não\n");
+		printf("Escolha uma opção: ");
+		scanf("%d", &op);
+
+		if(op == 0 || op == 1)
+			aux++;
+		else
+			mostrar_erro(2);
+	}
+	limpar();
+	
+	return op;
+}
+
+int menu_continuar(){
+	int op, aux=0;
+
+	while(aux == 0){
+		printf("Deseja continuar?\n");
+		printf("  1 - Sim\n");
+		printf("  0 - Sair\n");
 		printf("Escolha uma opção: ");
 		scanf("%d", &op);
 
