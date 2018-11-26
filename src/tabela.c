@@ -464,6 +464,74 @@ int listar_dados_tabelas(){
 	return 0;
 }
 
+void pesquisar(){
+	int sair=0, retorno, op;
+	char tabela[60], coluna[60];
+
+	// pegando o nome da tabela
+	while(sair == 0){
+		limpar();
+		listar_tabelas();
+		printf("Digite o nome da tabela para pesquisa: ");
+		scanf("%s", tabela);
+		strcat(tabela, ".txt");
+
+		// verificando se a tabela existe
+		retorno = verificar_existencia(tabela);
+		if(retorno == 0){
+			mostrar_erro(6);
+			if(menu_continuar() == 0)
+				return;
+		}
+		else if(retorno == 2)
+			return;
+		else
+			sair = 1;
+	}
+
+	// pegando o nome da coluna
+	sair = 0;
+	while(sair == 0){
+		limpar();
+		listar_colunas(tabela);
+		printf("Digite o nome da coluna para pesquisa: ");
+		scanf("%s", coluna);
+
+		// verificando se a coluna existe
+		retorno = verificar_existencia_coluna(tabela, coluna);
+		if(retorno == 0){
+			mostrar_erro(17);
+			if(menu_continuar() == 0)
+				return;
+		}
+		else if(retorno == 2)
+			return;
+		else
+			sair = 1;
+	}
+
+	// escolhendo tipo de pesquisa
+	op = menu_pesquisa();
+	switch(op){
+		case 1: // Valores maiores
+			break;
+		case 2: // Valores maiores ou iguais
+			break;
+		case 3: // Valores iguais
+			pesquisa_iguais(tabela, coluna);
+			break;
+		case 4: // Valores menores
+			break;
+		case 5: // Valores menores ou iguais
+			break;
+		case 6: // Valores próximos
+			break;
+		case 0: // Sair
+			return;
+			break;
+	}
+}
+
 int verificar_existencia(char nome[60]){
 	FILE *arq = fopen("tabelas.txt", "r");
 
@@ -482,6 +550,30 @@ int verificar_existencia(char nome[60]){
 			return 1;
 		}
 	}
+	fclose(arq);
+	return 0;
+}
+
+int verificar_existencia_coluna(char arquivo[60], char coluna[60]){
+	char valor[60];
+	int tipo;
+
+	// abrindo arquivo
+	FILE * arq = fopen(arquivo, "r");
+	if(arq == NULL){
+		mostrar_erro(10);
+		return 2;
+	}
+
+	// procurando coluna
+	while(fscanf(arq, "%s %d", valor, &tipo) != EOF && strcmp(valor, "|") != 0){
+		if(strcmp(coluna, valor) == 0){
+			fclose(arq);
+			return 1;
+		}
+	}
+
+	// em caso de não existencia
 	fclose(arq);
 	return 0;
 }
@@ -602,4 +694,26 @@ int maior_tamanho_coluna(char arquivo[60], char coluna[60]){
 
 	// retornando o maior tamanho
 	return maior;
+}
+
+int listar_colunas(char arquivo[60]){
+	int tipo;
+	char valor[60];
+
+	// abrindo o arquivo
+	FILE * arq = fopen(arquivo, "r");
+	if(arq == NULL){
+		mostrar_erro(10);
+		return 1;
+	}
+
+	// listando colunas
+	printf("======= COLUNAS =======\n");
+	while(fscanf(arq, "%s %d", valor, &tipo) != EOF && strcmp(valor, "|") != 0)
+		printf("  - %s\n", valor);
+
+	// fechando o arquivo
+	fclose(arq);
+
+	return 0;
 }

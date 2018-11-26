@@ -1,7 +1,8 @@
 #include  <stdio.h>
 #include "../include/menu.h"
 #include "../include/tabela.h"
-#include "../include/geral.h"
+#include "../include/uteis.h"
+#include "../include/pesquisas.h"
 
 int main(){
 	criar_arquivos_locais();
@@ -21,6 +22,7 @@ int main(){
 				listar_dados_tabelas();
 				break;
 			case 5: // pesquisar
+				pesquisar();
 				break;
 			case 6: // deletar tabela
 				del_tabela();

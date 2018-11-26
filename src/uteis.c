@@ -1,4 +1,4 @@
-#include "../include/geral.h"
+#include "../include/uteis.h"
 
 void mostrar_erro(int codigo){
 	char trash;
@@ -52,6 +52,9 @@ void mostrar_erro(int codigo){
 			break;
 		case 16:
 			fprintf(stderr, "Erro 16: memória insuficiente\n");
+			break;
+		case 17:
+			fprintf(stderr, "Erro 17: coluna não existe\n");
 			break;
 	}
 
@@ -135,7 +138,6 @@ char* tipo(int num){
 
 	return "error";
 }
-
 
 void limpar(){
 	#ifdef LINUX

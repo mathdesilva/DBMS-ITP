@@ -3,7 +3,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include "../include/geral.h"
+#include "../include/uteis.h"
 
 // Mostra o menu principal e retorna a opção escolhida
 int menu_principal();
@@ -19,5 +19,8 @@ int menu_chaveprimaria();
 
 // Mostra o menu de continuar operação
 int menu_continuar();
+
+// Mostra o menu de tipos de pesquisa;
+int menu_pesquisa();
 
 #endif

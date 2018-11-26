@@ -47,7 +47,6 @@ int menu_addcoluna(){
 	return op;
 }
 
-
 int menu_tipo(){
 	int op, aux=0;
 
@@ -109,4 +108,30 @@ int menu_continuar(){
 	limpar();
 	
 	return op;
+}
+
+int menu_pesquisa(){
+	int op, aux=0;
+
+	while(aux == 0){
+		limpar();
+		printf("======= PESQUISA =======\n");
+		printf("  1 - Valores maiores               (fazendo)\n");
+		printf("  2 - Valores maiores ou iguais     (fazendo)\n");
+		printf("  3 - Valores iguais                (fazendo)\n");
+		printf("  4 - Valores menores               (fazendo)\n");
+		printf("  5 - Valores menores ou iguais     (fazendo)\n");
+		printf("  6 - Valores próximos              (fazendo)\n");
+		printf("  0 - Sair\n");
+		printf("Digite uma opção: ");
+		scanf("%d", &op);
+
+		if(op >= 0 && op <=6)
+			aux++;
+		else
+			mostrar_erro(2);
+	}
+	limpar();
+
+	return 0;
 }

@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include <string.h>
 
+
 // apresentar erros
 void mostrar_erro(int codigo);
 
