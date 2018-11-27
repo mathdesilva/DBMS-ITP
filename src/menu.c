@@ -133,5 +133,5 @@ int menu_pesquisa(){
 	}
 	limpar();
 
-	return 0;
+	return op;
 }

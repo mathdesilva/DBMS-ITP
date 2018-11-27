@@ -117,7 +117,7 @@ int verificar_valor(char nome[60], int tipo){
 	return 1;
 }
 
-char* tipo(int num){
+char* pegar_tipo(int num){
 	switch(num){
 		case 1:
 			return "string";

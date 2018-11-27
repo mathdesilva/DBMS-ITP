@@ -21,7 +21,7 @@ int verificar_valor(char valor[60], int tipo);
 
 // passar o número do tipo
 // retorna ponteiro de char com o nome do tipo
-char* tipo(int num);
+char* pegar_tipo(int num);
 
 // limpar tela
 void limpar();

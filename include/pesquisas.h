@@ -8,6 +8,6 @@
 #include "../include/uteis.h"
 
 // imprime os valores iguais
-void pesquisa_iguais(char arquivo[60], char coluna[60]);
+void pesquisar_iguais(char arquivo[60], char coluna[60]);
 
 #endif

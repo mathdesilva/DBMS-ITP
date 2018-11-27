@@ -63,4 +63,8 @@ int maior_tamanho_coluna(char arquivo[60], char coluna[60]);
 // retorna 1 em caso de erro;
 int listar_colunas(char arquivo[60]);
 
+// retorna o int referente ao tipo da coluna
+// retorna -1 em caso de erro
+int pegar_tipo_coluna(char arquivo[60], char coluna[60]);
+
 #endif

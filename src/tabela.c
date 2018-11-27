@@ -244,7 +244,7 @@ int add_linha(){
 			fscanf(arq_aux, "%s %d", coluna, &numtipo);
 			sair1 = 0;
 			while(sair1 == 0){
-				printf("Digite o valor de %s (%s): ", coluna, tipo(numtipo));
+				printf("Digite o valor de %s (%s): ", coluna, pegar_tipo(numtipo));
 				scanf("%s", valor);
 				if(verificar_valor(valor, numtipo) == 0){
 					if(menu_continuar() == 0){
@@ -518,7 +518,7 @@ void pesquisar(){
 		case 2: // Valores maiores ou iguais
 			break;
 		case 3: // Valores iguais
-			pesquisa_iguais(tabela, coluna);
+			pesquisar_iguais(tabela, coluna);
 			break;
 		case 4: // Valores menores
 			break;
@@ -530,6 +530,7 @@ void pesquisar(){
 			return;
 			break;
 	}
+	
 }
 
 int verificar_existencia(char nome[60]){
@@ -716,4 +717,29 @@ int listar_colunas(char arquivo[60]){
 	fclose(arq);
 
 	return 0;
+}
+
+int pegar_tipo_coluna(char arquivo[60], char coluna[60]){
+	char valor[60];
+	int tipo;
+
+	// abrindo arquivo
+	FILE * arq = fopen(arquivo, "r");
+	if(arq == NULL){
+		mostrar_erro(10);
+		return -1;
+	}
+
+	// procurando coluna e pegando o tipo
+	while(fscanf(arq, "%s %d", valor, &tipo) != EOF && strcmp(valor, "|") != 0){
+		if(strcmp(valor, coluna) == 0){
+			fclose(arq);
+			return tipo;
+		}
+	}
+
+	// em caso de erro na busca
+	mostrar_erro(15);
+	fclose(arq);
+	return -1;
 }

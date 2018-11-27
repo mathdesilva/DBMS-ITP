@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "../include/uteis.h"
+#include "../include/pesquisas.h"
 
 // Mostra o menu principal e retorna a opção escolhida
 int menu_principal();
