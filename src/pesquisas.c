@@ -82,24 +82,14 @@ void pesquisar_iguais(char arquivo[60], char coluna[60]){
 
 	// passando linhas que são resultado para print.txt
 	while(fscanf(arq, "%s", valor) != EOF){
-		switch(tipo){
-			case 1: // string
-			case 2: // char
-			case 3: // int
-				if(strcmp(valor, valor_busca) == 0){
-					rewind(arq_aux);
-					for(i=0; i<(tot_col)*(linhaAtual+2)+1; i++)
-						fscanf(arq_aux, "%s", valor);
-					for(i=0; i<tot_col; i++){
-						fscanf(arq_aux, "%s", valor);
-						fprintf(arq_print, "%s ", valor);
-					}
-				}
-				break;
-			case 4: // float
-				break;
-			case 5: // double
-				break;
+		if(strcmp(valor, valor_busca) == 0){
+			rewind(arq_aux);
+			for(i=0; i<(tot_col)*(linhaAtual+2)+1; i++)
+				fscanf(arq_aux, "%s", valor);
+			for(i=0; i<tot_col; i++){
+				fscanf(arq_aux, "%s", valor);
+				fprintf(arq_print, "%s ", valor);
+			}
 		}
 		linhaAtual++;
 		for(int i=0; i<(tot_col-1); i++)
