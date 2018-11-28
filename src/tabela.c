@@ -511,22 +511,15 @@ void pesquisar(){
 	}
 
 	// escolhendo tipo de pesquisa
-	op = menu_pesquisa();
-	switch(op){
-		case 1: // Valores maiores
-		case 2: // Valores maiores ou iguais
-		case 3: // Valores iguais
-		case 4: // Valores menores
-		case 5: // Valores menores ou iguais
-			pesquisar_iguaisediferentes(tabela, coluna, op);
-			break;
-		case 6: // Valores próximos
-			break;
-		case 0: // Sair
-			return;
-			break;
-	}
-
+	int tipo = pegar_tipo_coluna(tabela, coluna);
+	if(tipo != 1)
+		op = menu_pesquisa1();
+	else
+		op = menu_pesquisa2();
+	if(op == 0)
+		return;
+	else
+		pesquisar_print(tabela, coluna, op);
 }
 
 int verificar_existencia(char nome[60]){

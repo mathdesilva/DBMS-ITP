@@ -12,7 +12,8 @@
 // imprime os valores iguais (código 3)
 // imprime os valores menores (código 4)
 // imprime os valores menores ou iguais (código 5)
-void pesquisar_iguaisediferentes(char arquivo[60], char coluna[60], int codigo);
+// imprime os valores próximos (códigos 6)
+void pesquisar_print(char arquivo[60], char coluna[60], int codigo);
 
 
 #endif

@@ -110,7 +110,7 @@ int menu_continuar(){
 	return op;
 }
 
-int menu_pesquisa(){
+int menu_pesquisa1(){
 	int op, aux=0;
 
 	while(aux == 0){
@@ -121,7 +121,32 @@ int menu_pesquisa(){
 		printf("  3 - Valores iguais\n");
 		printf("  4 - Valores menores\n");
 		printf("  5 - Valores menores ou iguais\n");
-		printf("  6 - Valores próximos          (fazendo)\n");
+		printf("  0 - Sair\n");
+		printf("Digite uma opção: ");
+		scanf("%d", &op);
+
+		if(op >= 0 && op <=5)
+			aux++;
+		else
+			mostrar_erro(2);
+	}
+	limpar();
+
+	return op;
+}
+
+int menu_pesquisa2(){
+	int op, aux=0;
+
+	while(aux == 0){
+		limpar();
+		printf("======= PESQUISA =======\n");
+		printf("  1 - Valores maiores\n");
+		printf("  2 - Valores maiores ou iguais\n");
+		printf("  3 - Valores iguais\n");
+		printf("  4 - Valores menores\n");
+		printf("  5 - Valores menores ou iguais\n");
+		printf("  6 - Valores próximos\n");
 		printf("  0 - Sair\n");
 		printf("Digite uma opção: ");
 		scanf("%d", &op);

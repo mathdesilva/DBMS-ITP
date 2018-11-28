@@ -22,6 +22,9 @@ int menu_chaveprimaria();
 int menu_continuar();
 
 // Mostra o menu de tipos de pesquisa;
-int menu_pesquisa();
+int menu_pesquisa1();
+
+// Mostra o menu de tipos de pesquisa para strings;
+int menu_pesquisa2();
 
 #endif

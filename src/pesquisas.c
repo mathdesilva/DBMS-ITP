@@ -1,6 +1,6 @@
 #include "../include/pesquisas.h"
 
-void pesquisar_iguaisediferentes(char arquivo[60], char coluna[60], int codigo){
+void pesquisar_print(char arquivo[60], char coluna[60], int codigo){
 	int tipo, tot_col, pos_col, linhaAtual;
 	char valor[60], valor_busca[60], trash;
 
@@ -216,6 +216,18 @@ void pesquisar_iguaisediferentes(char arquivo[60], char coluna[60], int codigo){
 						break;
 				}
 				break;
+			case 6:
+				switch(tipo){
+					case 1:
+						if(strcmp(valor_busca, valor) == 0 || strstr(valor_busca, valor) != NULL || strstr(valor, valor_busca) != NULL)
+							valido = 1;
+						break;
+					case 2:
+					case 3:
+					case 4:
+					case 5:
+						break;
+				}
 		}
 
 		if(valido == 1){
