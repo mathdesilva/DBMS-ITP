@@ -19,7 +19,7 @@ int main(){
 				listar_todas_tabelas();
 				break;
 			case 4: // mostrar dados de tabela
-				listar_dados_tabelas();
+				listar_todos_dados_tabelas();
 				break;
 			case 5: // pesquisar
 				pesquisar();
@@ -28,6 +28,7 @@ int main(){
 				del_tabela();
 				break;
 			case 7: // deletar linha
+				//del_linha();
 				break;
 			case 0: // sair
 				break;

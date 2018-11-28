@@ -21,14 +21,20 @@ int add_linha();
 // deletar uma tabela
 int del_tabela();
 
+// deleta uma linha de uma tabela
+void del_linha();
+
 // lista todas as tabelas e tem menu para voltar
 void listar_todas_tabelas();
 
 // lista todas as tabelas criadas
 int listar_tabelas();
 
-// lista todos os dados de uma tabela
-int listar_dados_tabelas();
+// lista todos os dados de uma tabela com menu
+int listar_todos_dados_tabelas();
+
+// listar todos os dados de uma tabela
+int listar_dados_tabelas(char tabela[60]);
 
 // pesquisa dados na tabela
 void pesquisar();

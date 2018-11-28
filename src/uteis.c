@@ -1,7 +1,6 @@
 #include "../include/uteis.h"
 
 void mostrar_erro(int codigo){
-	char trash;
 	limpar();
 
 	switch(codigo){
@@ -58,10 +57,7 @@ void mostrar_erro(int codigo){
 			break;
 	}
 
-	printf("Aperte ENTER para voltar");
-	getchar();
-	scanf("%c", &trash);
-	limpar();
+	menu_voltar();
 }
 
 int verificar_nome(char nome[60]){

@@ -2,7 +2,7 @@
 
 void pesquisar_print(char arquivo[60], char coluna[60], int codigo){
 	int tipo, tot_col, pos_col, linhaAtual;
-	char valor[60], valor_busca[60], trash;
+	char valor[60], valor_busca[60];
 
 	// pegando o número total de colunas na tabela
 	tot_col = num_colunas(arquivo);
@@ -300,8 +300,5 @@ void pesquisar_print(char arquivo[60], char coluna[60], int codigo){
 	remove("print.txt");
 	free(tamanhos);
 
-	printf("Aperte ENTER para voltar");
-	getchar();
-	scanf("%c", &trash);
-	limpar();
+	menu_voltar();
 }

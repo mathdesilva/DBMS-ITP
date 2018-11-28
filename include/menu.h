@@ -27,4 +27,7 @@ int menu_pesquisa1();
 // Mostra o menu de tipos de pesquisa para strings;
 int menu_pesquisa2();
 
+// menu com "aperte ENTER para voltar"
+void menu_voltar();
+
 #endif

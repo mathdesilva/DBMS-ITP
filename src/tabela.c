@@ -1,7 +1,7 @@
 #include "../include/tabela.h"
 
 int add_tabela(){
-	char nome[60], trash;
+	char nome[60];
 
 	// pegar o nome da nova tabela
 	limpar();
@@ -48,10 +48,7 @@ int add_tabela(){
 	// mensagem de tabela criada com sucesso
 	limpar();
 	printf("Tabela criada com sucesso!\n");
-	printf("Aperte ENTER para voltar\n");
-	getchar();
-	scanf("%c", &trash);
-	limpar();
+	menu_voltar();
 
 	//adicionar colunas
 	arq = fopen(nome, "wr");
@@ -82,7 +79,7 @@ int add_tabela(){
 }
 
 int add_coluna(FILE * arquivo, int chave_adicionada){
-	char titulo[60], trash;
+	char titulo[60];
 	int chave=0, op;
 	
 	// pegando nome da coluna
@@ -117,10 +114,7 @@ int add_coluna(FILE * arquivo, int chave_adicionada){
 
 	// mensagem de coluna adicionada com sucesso
 	printf("Coluna adicionada com sucesso\n");
-	printf("Aperte ENTER para voltar\n");
-	getchar();
-	scanf("%c", &trash);
-	limpar();
+	menu_voltar();
 
 	// adicionando informações na tabela
 	if(chave == 1){
@@ -284,11 +278,16 @@ int add_linha(){
 	fclose(arq_aux);
 	remove("buffer.txt");
 
+	//finalizando
+	limpar();
+	printf("Linha adicionada com sucesso!!\n");
+	menu_voltar();
+
 	return 0;
 }
 
 int del_tabela(){
-	char nome[60], trash;
+	char nome[60];
 
 	//listar todas as tabelas existentes
  	if(listar_tabelas() == 2)
@@ -335,22 +334,65 @@ int del_tabela(){
 
 	limpar();
 	printf("tabela deletada com sucesso\n");
-	printf("Aperte ENTER para voltar\n");
-	getchar();
-	scanf("%c", &trash);
-	limpar();
+	menu_voltar();
 
 	return 0;
 }
 
+void del_linha(){
+	// int tot_col, pos_col, sair = 0, retorno;
+	// char tabela[60]; chavep[60];
+
+	// // pegando o nome da tabela
+	// while(sair == 0){
+	// 	limpar();
+	// 	listar_tabelas();
+	// 	printf("Digite o nome da tabela: ");
+	// 	scanf("%s", tabela);
+	// 	strcat(tabela, ".txt");
+
+	// 	// verificando se a tabela existe
+	// 	retorno = verificar_existencia(tabela);
+	// 	if(retorno == 0){
+	// 		mostrar_erro(6);
+	// 		if(menu_continuar() == 0)
+	// 			return;
+	// 	}
+	// 	else if(retorno == 2)
+	// 		return;
+	// 	else
+	// 		sair = 1;
+	// }
+	
+
+	// // pegando chave primaria da linha
+	// sair = 0;
+	// while(sair == 0){
+	// 	limpar();
+	// 	printf("Digite a chave primaria da linha a ser deletada: ");
+	// 	scanf("%s", chavep);
+
+	// 	// verificando se a chave primaria existe
+	// 	retorno = verificar_existencia_coluna(tabela, coluna);
+	// 	if(retorno == 0){
+	// 		mostrar_erro(17);
+	// 		if(menu_continuar() == 0)
+	// 			return;
+	// 	}
+	// 	else if(retorno == 2)
+	// 		return;
+	// 	else
+	// 		sair = 1;
+	// }
+
+	// // pegando o número total de colunas na tabela
+	// tot_col = 
+}
+
 void listar_todas_tabelas(){
-	char trash;
 	limpar();
 	listar_tabelas();
-	printf("Aperte ENTER para voltar\n");
-	getchar();
-	scanf("%c", &trash);
-	limpar();
+	menu_voltar();
 }
 
 int listar_tabelas(){
@@ -375,8 +417,7 @@ int listar_tabelas(){
 	return 0;
 }
 
-int listar_dados_tabelas(){
-	int num_col;
+int listar_todos_dados_tabelas(){
 	char nome[60];
 
 	// pegar nome da tabela
@@ -394,15 +435,26 @@ int listar_dados_tabelas(){
 	else if(verificar_existencia(nome) == 2)
 		return 0;
 
+	// listar os dados da tabela
+	listar_dados_tabelas(nome);
+
+	// finalizar
+	menu_voltar();
+	return 0;
+}
+
+int listar_dados_tabelas(char tabela[60]){
+	int num_col;
+
 	// pegar numero de colunas
-	num_col = num_colunas(nome);
+	num_col = num_colunas(tabela);
 	if(num_col == -1)
 		return 0;
 
 	// clonando tabela em outro arquivo "clone.txt"
 	char valor[60];
 	int tipo;
-	FILE * arq = fopen(nome, "r");
+	FILE * arq = fopen(tabela, "r");
 	if(arq == NULL){
 		mostrar_erro(10);
 		return 0;
@@ -455,12 +507,6 @@ int listar_dados_tabelas(){
 	free(tamanhos);
 	remove("clone.txt");
 
-	// finalizar
-	char trash;
-	printf("Aperte ENTER para voltar");
-	getchar();
-	scanf("%c", &trash);
-	limpar();
 	return 0;
 }
 

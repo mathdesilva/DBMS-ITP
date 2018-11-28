@@ -160,3 +160,11 @@ int menu_pesquisa2(){
 
 	return op;
 }
+
+void menu_voltar(){
+	char trash;
+	printf("Aperte ENTER para voltar");
+	getchar();
+	scanf("%c", &trash);
+	limpar();
+}
