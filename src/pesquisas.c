@@ -1,6 +1,6 @@
 #include "../include/pesquisas.h"
 
-void pesquisar_iguais(char arquivo[60], char coluna[60]){
+void pesquisar_iguaisediferentes(char arquivo[60], char coluna[60], int codigo){
 	int tipo, tot_col, pos_col, linhaAtual;
 	char valor[60], valor_busca[60], trash;
 
@@ -80,9 +80,145 @@ void pesquisar_iguais(char arquivo[60], char coluna[60]){
 		fscanf(arq, "%s", valor);
 	}
 
-	// passando linhas que são resultado para print.txt
+
+	/////// P E S Q U I S A ///////////////////////////////////////////////////////////
+	// variaveis para as pesquisas
+	int valorb_convert_int, valor_convert_int, valido;
+	double valorb_convert_double, valor_convert_double;
+
 	while(fscanf(arq, "%s", valor) != EOF){
-		if(strcmp(valor, valor_busca) == 0){
+		valido = 0;
+
+		// passando linhas que são resultado para print.txt
+		switch(codigo){
+			case 1: // maiores
+				switch(tipo){
+					case 1: // string
+						if(strcmp(valor_busca, valor) < 0)
+							valido = 1;
+						break;
+					case 2: // char
+						if(valor_busca[0] < valor[0])
+							valido = 1;
+						break;
+					case 3: // int
+						valorb_convert_int = atoi(valor_busca);
+						valor_convert_int = atoi(valor);
+						if(valorb_convert_int < valor_convert_int)
+							valido = 1;
+						break;
+					case 4: // float
+					case 5: // double
+						valorb_convert_double = atof(valor_busca);
+						valor_convert_double = atof(valor);
+						if(valorb_convert_double < valor_convert_double)
+							valido = 1;
+						break;
+				}
+				break;
+			case 2: // maiores ou iguais
+				switch(tipo){
+					case 1: // string
+						if(strcmp(valor_busca, valor) <= 0)
+							valido = 1;
+						break;
+					case 2: // char
+						if(valor_busca[0] <= valor[0])
+							valido = 1;
+						break;
+					case 3: // int
+						valorb_convert_int = atoi(valor_busca);
+						valor_convert_int = atoi(valor);
+						if(valorb_convert_int <= valor_convert_int)
+							valido = 1;
+						break;
+					case 4: // float
+					case 5: // double
+						valorb_convert_double = atof(valor_busca);
+						valor_convert_double = atof(valor);
+						if(valorb_convert_double <= valor_convert_double)
+							valido = 1;
+						break;
+				}
+				break;
+			case 3: // iguais
+				switch(tipo){
+					case 1: // string
+						if(strcmp(valor_busca, valor) == 0)
+							valido = 1;
+						break;
+					case 2: // char
+						if(valor_busca[0] == valor[0])
+							valido = 1;
+						break;
+					case 3: // int
+						valorb_convert_int = atoi(valor_busca);
+						valor_convert_int = atoi(valor);
+						if(valorb_convert_int == valor_convert_int)
+							valido = 1;
+						break;
+					case 4: // float
+					case 5: // double
+						valorb_convert_double = atof(valor_busca);
+						valor_convert_double = atof(valor);
+						if(valorb_convert_double == valor_convert_double)
+							valido = 1;
+						break;
+				}
+				break;
+			case 4: // menores
+				switch(tipo){
+					case 1: // string
+						if(strcmp(valor_busca, valor) > 0)
+							valido = 1;
+						break;
+					case 2: // char
+						if(valor_busca[0] > valor[0])
+							valido = 1;
+						break;
+					case 3: // int
+						valorb_convert_int = atoi(valor_busca);
+						valor_convert_int = atoi(valor);
+						if(valorb_convert_int > valor_convert_int)
+							valido = 1;
+						break;
+					case 4: // float
+					case 5: // double
+						valorb_convert_double = atof(valor_busca);
+						valor_convert_double = atof(valor);
+						if(valorb_convert_double > valor_convert_double)
+							valido = 1;
+						break;
+				}
+				break;
+			case 5: // menores ou iguais
+				switch(tipo){
+					case 1: // string
+						if(strcmp(valor_busca, valor) >= 0)
+							valido = 1;
+						break;
+					case 2: // char
+						if(valor_busca[0] >= valor[0])
+							valido = 1;
+						break;
+					case 3: // int
+						valorb_convert_int = atoi(valor_busca);
+						valor_convert_int = atoi(valor);
+						if(valorb_convert_int >= valor_convert_int)
+							valido = 1;
+						break;
+					case 4: // float
+					case 5: // double
+						valorb_convert_double = atof(valor_busca);
+						valor_convert_double = atof(valor);
+						if(valorb_convert_double >= valor_convert_double)
+							valido = 1;
+						break;
+				}
+				break;
+		}
+
+		if(valido == 1){
 			rewind(arq_aux);
 			for(i=0; i<(tot_col)*(linhaAtual+2)+1; i++)
 				fscanf(arq_aux, "%s", valor);
@@ -91,14 +227,20 @@ void pesquisar_iguais(char arquivo[60], char coluna[60]){
 				fprintf(arq_print, "%s ", valor);
 			}
 		}
+
 		linhaAtual++;
 		for(int i=0; i<(tot_col-1); i++)
 			fscanf(arq, "%s", valor);
 	}
+	
 	fclose(arq_aux);
 	fclose(arq_print);
 	remove("auxiliar.txt");
 
+
+
+	
+	///////////////////////////////////////////////////////////////////////////////////
 	// alocando o tamanho das maiores strings de cada coluna
 	rewind(arq);
 	int *tamanhos = (int *) malloc(tot_col * sizeof(int));

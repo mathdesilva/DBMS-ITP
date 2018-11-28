@@ -9,7 +9,7 @@ int menu_principal(){
 		printf("  2 - Adicionar nova linha  \n");
 		printf("  3 - Listar tabelas existentes\n");
 		printf("  4 - Mostra dados de tabela\n");
-		printf("  5 - Pesquisar dado        (fazendo)\n");
+		printf("  5 - Pesquisar dado\n");
 		printf("  6 - Deletar tabela        \n");
 		printf("  7 - Deletar linha         (fazendo)\n");
 		printf("  0 - Sair\n");
@@ -116,12 +116,12 @@ int menu_pesquisa(){
 	while(aux == 0){
 		limpar();
 		printf("======= PESQUISA =======\n");
-		printf("  1 - Valores maiores               (fazendo)\n");
-		printf("  2 - Valores maiores ou iguais     (fazendo)\n");
-		printf("  3 - Valores iguais                (fazendo)\n");
-		printf("  4 - Valores menores               (fazendo)\n");
-		printf("  5 - Valores menores ou iguais     (fazendo)\n");
-		printf("  6 - Valores próximos              (fazendo)\n");
+		printf("  1 - Valores maiores\n");
+		printf("  2 - Valores maiores ou iguais\n");
+		printf("  3 - Valores iguais\n");
+		printf("  4 - Valores menores\n");
+		printf("  5 - Valores menores ou iguais\n");
+		printf("  6 - Valores próximos          (fazendo)\n");
 		printf("  0 - Sair\n");
 		printf("Digite uma opção: ");
 		scanf("%d", &op);

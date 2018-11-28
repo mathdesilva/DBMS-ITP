@@ -7,7 +7,12 @@
 #include "../include/tabela.h"
 #include "../include/uteis.h"
 
-// imprime os valores iguais
-void pesquisar_iguais(char arquivo[60], char coluna[60]);
+// imprime os valores maiores (código 1)
+// imprime os valores maiores ou iguais (código 2)
+// imprime os valores iguais (código 3)
+// imprime os valores menores (código 4)
+// imprime os valores menores ou iguais (código 5)
+void pesquisar_iguaisediferentes(char arquivo[60], char coluna[60], int codigo);
+
 
 #endif

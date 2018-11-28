@@ -514,15 +514,11 @@ void pesquisar(){
 	op = menu_pesquisa();
 	switch(op){
 		case 1: // Valores maiores
-			break;
 		case 2: // Valores maiores ou iguais
-			break;
 		case 3: // Valores iguais
-			pesquisar_iguais(tabela, coluna);
-			break;
 		case 4: // Valores menores
-			break;
 		case 5: // Valores menores ou iguais
+			pesquisar_iguaisediferentes(tabela, coluna, op);
 			break;
 		case 6: // Valores próximos
 			break;
@@ -530,7 +526,7 @@ void pesquisar(){
 			return;
 			break;
 	}
-	
+
 }
 
 int verificar_existencia(char nome[60]){
