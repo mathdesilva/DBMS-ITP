@@ -1,7 +1,7 @@
 #include "../include/pesquisas.h"
 
 void pesquisar_print(char arquivo[60], char coluna[60], int codigo){
-	int tipo, tot_col, pos_col, linhaAtual;
+	int tipo, tot_col, pos_col, linhaAtual, teveResultado = 0;
 	char valor[60], valor_busca[60];
 
 	// pegando o número total de colunas na tabela
@@ -231,6 +231,7 @@ void pesquisar_print(char arquivo[60], char coluna[60], int codigo){
 		}
 
 		if(valido == 1){
+			teveResultado = 1;
 			rewind(arq_aux);
 			for(i=0; i<(tot_col)*(linhaAtual+2)+1; i++)
 				fscanf(arq_aux, "%s", valor);
@@ -284,6 +285,17 @@ void pesquisar_print(char arquivo[60], char coluna[60], int codigo){
 	}
 	printf("\n");
 	fscanf(arq_print, "%s", valor);
+
+	// verificando se há resultados
+	if(teveResultado == 0){
+		limpar();
+		fclose(arq_print);
+		remove("print.txt");
+		free(tamanhos);
+		printf("Não há resultados para a busca\n");
+		menu_voltar();
+		return;
+	}
 
 	// printando os valores da tabela
 	int aux = 0;
