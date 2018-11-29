@@ -34,5 +34,6 @@ int main(){
 		}
 		op = menu_principal();
 	}
-
+	
+	return 0;
 }

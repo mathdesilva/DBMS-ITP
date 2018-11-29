@@ -1,6 +1,6 @@
 #include "../include/tabela.h"
 
-int add_tabela(){
+void add_tabela(){
 	char nome[60];
 
 	// pegar o nome da nova tabela
@@ -11,28 +11,28 @@ int add_tabela(){
 	// verificar tamanho da string
 	if(strlen(nome) > 54){
 		mostrar_erro(1);
-		return 0;
+		return;
 	}
 	// verificar se o nome não possui caracteres especiais
 	if(verificar_nome(nome) == 0)
-		return 0;
+		return;
 
 	// verificar se a tabela já existe
 	strcat(nome, ".txt");
-	if(verificar_existencia(nome) == 1){
+	if(verificar_existencia_tabela(nome) == 1){
 		mostrar_erro(3);
-		return 0;
+		return;
 	}
 	// caso retorne erro
-	else if(verificar_existencia(nome) == 2){
-		return 0;
+	else if(verificar_existencia_tabela(nome) == 2){
+		return;
 	}
 
 	// criando um novo arquivo
 	FILE * arq = fopen(nome, "w");
 	if(arq == NULL){
 		mostrar_erro(5);
-		return 0;
+		return;
 	}
 	fclose(arq);
 
@@ -40,7 +40,7 @@ int add_tabela(){
 	arq = fopen("tabelas.txt", "a");
 	if(arq == NULL){
 		mostrar_erro(4);
-		return 0;
+		return;
 	}
 	fprintf(arq, "%s\n", nome);
 	fclose(arq);
@@ -54,7 +54,7 @@ int add_tabela(){
 	arq = fopen(nome, "wr");
 	if(arq == NULL){
 		mostrar_erro(6);
-		return 0;
+		return;
 	}
 	FILE * aux = NULL;
 	do{
@@ -71,11 +71,11 @@ int add_tabela(){
 			mostrar_erro(8);
 		}
 	}
+
+	// fechando o arquivo da tabela
 	fprintf(arq, "|\n");
 	fclose(arq);
 	remove("auxiliar2.txt");
-
-	return 0;
 }
 
 int add_coluna(FILE * arquivo, int chave_adicionada){
@@ -91,7 +91,7 @@ int add_coluna(FILE * arquivo, int chave_adicionada){
 	if(verificar_nome(titulo) == 0)
 		return 0;
 
-	// TODO: verificando se a coluna já existe
+	// verificando se a coluna já existe
 	FILE * aux = fopen("auxiliar2.txt", "r");
 	char cmp_titulo[60];
 	while(fscanf(aux, "%s", cmp_titulo) != EOF){
@@ -127,7 +127,7 @@ int add_coluna(FILE * arquivo, int chave_adicionada){
 	}
 }
 
-int add_linha(){
+void add_linha(){
 	char nome[60];
 
 	// pegar o nome da tabela
@@ -137,22 +137,22 @@ int add_linha(){
 	strcat(nome, ".txt");
 
 	// verificar se o arquivo existe
-	if(verificar_existencia(nome) == 0){
+	if(verificar_existencia_tabela(nome) == 0){
 		mostrar_erro(6);
-		return 0;
+		return;
 	}
-	else if(verificar_existencia(nome) == 2)
-		return 0;
+	else if(verificar_existencia_tabela(nome) == 2)
+		return;
 
 	// pegar posição da coluna da cheva primária
 	int col_chavePrimaria = pegar_chave_primaria(nome);
 	if(col_chavePrimaria == -1)
-		return 0;
+		return;
 
 	// pegar número de colunas da tabela
 	int num_col = num_colunas(nome);
 	if(num_col == -1)
-		return 0;
+		return;
 
 	// pegar valor da chave primária
 	char nome_chavep[60], valor[60], chavep[60];
@@ -160,7 +160,7 @@ int add_linha(){
 	FILE * arq = fopen(nome, "r");
 	if(arq == NULL){
 		mostrar_erro(10);
-		return 0;
+		return;
 	}
 	for(int i=0; i<col_chavePrimaria; i++)
 		fscanf(arq, "%s %d", nome_chavep, &num_aux);
@@ -171,7 +171,7 @@ int add_linha(){
 		scanf("%s", chavep);
 		if(verificar_valor(chavep, 3) == 0){
 			if(menu_continuar() == 0)
-				return 0;
+				return;
 			else
 				continue;
 		}
@@ -184,7 +184,7 @@ int add_linha(){
 			if(strcmp(valor, chavep) == 0){
 				mostrar_erro(12);
 				if(menu_continuar() == 0)
-					return 0;
+					return;
 				else{
 					sair1 = 1;
 					break;
@@ -205,7 +205,7 @@ int add_linha(){
 	FILE * arq_aux = fopen("auxiliar3.txt", "w");
 	if(arq_aux == NULL){
 		mostrar_erro(5);
-		return 0;
+		return;
 	}
 	for(int i=0; i<num_col*2; i++){
 		fscanf(arq, "%s", valor);
@@ -221,13 +221,13 @@ int add_linha(){
 	arq_aux = fopen("auxiliar3.txt", "r");
 	if(arq_aux == NULL){
 		mostrar_erro(10);
-		return 0;
+		return;
 	}
 	arq = fopen("buffer.txt", "w");
 	if(arq == NULL){
 		mostrar_erro(10);
 		remove("auxiliar3.txt");
-		return 0;
+		return;
 	}
 	for(int i=0; i<num_col; i++){
 		if(i == (col_chavePrimaria-1)){
@@ -246,7 +246,7 @@ int add_linha(){
 						fclose(arq_aux);
 						remove("buffer.txt");
 						remove("auxiliar3.txt");
-						return 0;
+						return;
 					}
 				}
 				else
@@ -263,13 +263,13 @@ int add_linha(){
 	arq = fopen(nome, "a");
 	if(arq == NULL){
 		mostrar_erro(10);
-		return 0;
+		return;
 	}
 	arq_aux = fopen("buffer.txt", "r");
 	if(arq_aux == NULL){
 		mostrar_erro(10);
 		fclose(arq);
-		return 0;
+		return;
 	}
 	while(fscanf(arq_aux, "%s", valor) != EOF)
 		fprintf(arq, "%s ", valor);
@@ -282,16 +282,14 @@ int add_linha(){
 	limpar();
 	printf("Linha adicionada com sucesso!!\n");
 	menu_voltar();
-
-	return 0;
 }
 
-int del_tabela(){
+void del_tabela(){
 	char nome[60];
 
 	//listar todas as tabelas existentes
  	if(listar_tabelas() == 2)
-		return 0;
+		return;
 
 	// pegar a tabela a ser deletada
 	printf("escreva o nome da tabela para ser deletada: ");
@@ -299,26 +297,26 @@ int del_tabela(){
 	strcat(nome, ".txt");
 
 	// verificar existencia da tabela
-	if(verificar_existencia(nome) == 0){
+	if(verificar_existencia_tabela(nome) == 0){
 		mostrar_erro(6);
-		return 0;
+		return;
 	} 
 	// caso retorne erro
-	else if(verificar_existencia(nome) == 2)
-		return 0;
+	else if(verificar_existencia_tabela(nome) == 2)
+		return;
 
 	// deletando do tabelas.txt
 	char swap[60];
 	FILE *aux = fopen("auxiliar.txt", "w");
 	if(aux == NULL){
 		mostrar_erro(7);
-		return 0;
+		return;
 	}
 	FILE *arq = fopen("tabelas.txt", "r");
 	if(arq == NULL){
 		mostrar_erro(4);
 		remove("auxiliar.txt");
-		return 0;
+		return;
 	}
 	while(fscanf(arq, "%s", swap) != EOF){
 		if(strcmp(nome, swap) != 0)
@@ -332,11 +330,12 @@ int del_tabela(){
 	// deletando tabela
 	remove(nome);
 
+	// mensagem de tabela deletada com sucesso
 	limpar();
 	printf("tabela deletada com sucesso\n");
 	menu_voltar();
 
-	return 0;
+	return;
 }
 
 void del_linha(){
@@ -353,7 +352,7 @@ void del_linha(){
 		strcat(tabela, ".txt");
 
 		// verificando se a tabela existe
-		retorno = verificar_existencia(tabela);
+		retorno = verificar_existencia_tabela(tabela);
 		if(retorno == 0){
 			mostrar_erro(6);
 			if(menu_continuar() == 0)
@@ -469,19 +468,27 @@ void del_linha(){
 
 void listar_todas_tabelas(){
 	limpar();
-	listar_tabelas();
+
+	// chamando função que lista todas as tabelas
+	if(listar_tabelas() == -1)
+		return;
+
+	// menu para voltar
 	menu_voltar();
 }
 
 int listar_tabelas(){
-	FILE *arq = fopen("tabelas.txt", "r");
 	char nome[60];
 	int tamanho;
+	
+	// abrindo arquivo
+	FILE * arq = fopen("tabelas.txt", "r");
 	if(arq == NULL){
 		mostrar_erro(4);
-		return 2;
+		return -1;
 	}
 
+	// printando
 	printf("======= TABELAS =======\n");
 	while(fscanf(arq, "%s", nome) != EOF){
 		tamanho = strlen(nome);
@@ -490,35 +497,37 @@ int listar_tabelas(){
 		printf("  - %s\n", saida);
 	}
 
+	// fechando arquivo
 	fclose(arq);
 
 	return 0;
 }
 
-int listar_todos_dados_tabelas(){
+void listar_todos_dados_tabelas(){
 	char nome[60];
 
 	// pegar nome da tabela
-	listar_tabelas();
+	if(listar_tabelas() == -1)
+		return;
 	printf("Digite o nome da tabela a ser listada: ");
 	scanf("%s", nome);
 	strcat(nome, ".txt");
 	limpar();
 
 	// verificando existencia
-	if(verificar_existencia(nome) == 0){
+	if(verificar_existencia_tabela(nome) == 0){
 		mostrar_erro(6);
-		return 0;
+		return;
 	}
-	else if(verificar_existencia(nome) == 2)
-		return 0;
+	else if(verificar_existencia_tabela(nome) == 2)
+		return;
 
 	// listar os dados da tabela
-	listar_dados_tabelas(nome);
+	if(listar_dados_tabelas(nome) == -1)
+		return;
 
 	// finalizar
 	menu_voltar();
-	return 0;
 }
 
 int listar_dados_tabelas(char tabela[60]){
@@ -527,7 +536,7 @@ int listar_dados_tabelas(char tabela[60]){
 	// pegar numero de colunas
 	num_col = num_colunas(tabela);
 	if(num_col == -1)
-		return 0;
+		return -1;
 
 	// clonando tabela em outro arquivo "clone.txt"
 	char valor[60];
@@ -535,13 +544,13 @@ int listar_dados_tabelas(char tabela[60]){
 	FILE * arq = fopen(tabela, "r");
 	if(arq == NULL){
 		mostrar_erro(10);
-		return 0;
+		return -1;
 	}
 	FILE * clone = fopen("clone.txt", "w");
 	if(arq == NULL){
 		mostrar_erro(10);
 		fclose(arq);
-		return 0;
+		return -1;
 	}
 	while(fscanf(arq, "%s", valor) != EOF)
 		fprintf(clone, "%s ", valor);
@@ -553,7 +562,7 @@ int listar_dados_tabelas(char tabela[60]){
 	if(tamanhos == NULL){
 		mostrar_erro(16);
 		fclose(arq);
-		return 0;
+		return -1;
 	}
 	for(int i=0; i<num_col; i++){
 		fscanf(arq, "%s %d", valor, &tipo);
@@ -601,7 +610,7 @@ void pesquisar(){
 		strcat(tabela, ".txt");
 
 		// verificando se a tabela existe
-		retorno = verificar_existencia(tabela);
+		retorno = verificar_existencia_tabela(tabela);
 		if(retorno == 0){
 			mostrar_erro(6);
 			if(menu_continuar() == 0)
@@ -617,7 +626,8 @@ void pesquisar(){
 	sair = 0;
 	while(sair == 0){
 		limpar();
-		listar_colunas(tabela);
+		if(listar_colunas(tabela) == -1)
+			return;
 		printf("Digite o nome da coluna para pesquisa: ");
 		scanf("%s", coluna);
 
@@ -646,17 +656,21 @@ void pesquisar(){
 		pesquisar_print(tabela, coluna, op);
 }
 
-int verificar_existencia(char nome[60]){
-	FILE *arq = fopen("tabelas.txt", "r");
-
+int verificar_existencia_tabela(char nome[60]){
 	int size = strlen(nome);
-	if(nome[size-4] != '.')
-		strcat(nome, ".txt");
 
+	// abrindo arquivo
+	FILE *arq = fopen("tabelas.txt", "r");
 	if(arq == NULL){
 		mostrar_erro(4);
 		return 2;
 	}
+
+	// adicionando .txt no nome da tabela
+	if(nome[size-4] != '.')
+		strcat(nome, ".txt");
+
+	// verificando existencia
 	char arquivo[60];
 	while(fscanf(arq, "%s", arquivo) != EOF){
 		if(strcmp(arquivo, nome) == 0){
@@ -664,6 +678,8 @@ int verificar_existencia(char nome[60]){
 			return 1;
 		}
 	}
+
+	// finalizando
 	fclose(arq);
 	return 0;
 }
@@ -818,7 +834,7 @@ int listar_colunas(char arquivo[60]){
 	FILE * arq = fopen(arquivo, "r");
 	if(arq == NULL){
 		mostrar_erro(10);
-		return 1;
+		return -1;
 	}
 
 	// listando colunas
