@@ -340,53 +340,125 @@ int del_tabela(){
 }
 
 void del_linha(){
-	// int tot_col, pos_col, sair = 0, retorno;
-	// char tabela[60]; chavep[60];
+	int tot_col, pos_chavep, sair = 0, retorno, linha, auxlinha;
+	char tabela[60], chavep[60], valor[60];
+	FILE * arq;
 
-	// // pegando o nome da tabela
-	// while(sair == 0){
-	// 	limpar();
-	// 	listar_tabelas();
-	// 	printf("Digite o nome da tabela: ");
-	// 	scanf("%s", tabela);
-	// 	strcat(tabela, ".txt");
+	// pegando o nome da tabela
+	while(sair == 0){
+		limpar();
+		listar_tabelas();
+		printf("Digite o nome da tabela: ");
+		scanf("%s", tabela);
+		strcat(tabela, ".txt");
 
-	// 	// verificando se a tabela existe
-	// 	retorno = verificar_existencia(tabela);
-	// 	if(retorno == 0){
-	// 		mostrar_erro(6);
-	// 		if(menu_continuar() == 0)
-	// 			return;
-	// 	}
-	// 	else if(retorno == 2)
-	// 		return;
-	// 	else
-	// 		sair = 1;
-	// }
+		// verificando se a tabela existe
+		retorno = verificar_existencia(tabela);
+		if(retorno == 0){
+			mostrar_erro(6);
+			if(menu_continuar() == 0)
+				return;
+		}
+		else if(retorno == 2)
+			return;
+		else
+			sair = 1;
+	}
 	
+	// pegando o número total de colunas na tabela
+	tot_col = num_colunas(tabela);
 
-	// // pegando chave primaria da linha
-	// sair = 0;
-	// while(sair == 0){
-	// 	limpar();
-	// 	printf("Digite a chave primaria da linha a ser deletada: ");
-	// 	scanf("%s", chavep);
+	// pegando chave primaria da linha
+	sair = 0;
+	while(sair == 0){
+		limpar();
+		listar_dados_tabelas(tabela);
+		printf("Digite a chave primaria da linha a ser deletada: ");
+		scanf("%s", chavep);
 
-	// 	// verificando se a chave primaria existe
-	// 	retorno = verificar_existencia_coluna(tabela, coluna);
-	// 	if(retorno == 0){
-	// 		mostrar_erro(17);
-	// 		if(menu_continuar() == 0)
-	// 			return;
-	// 	}
-	// 	else if(retorno == 2)
-	// 		return;
-	// 	else
-	// 		sair = 1;
-	// }
+		// pegando posição da chave primária
+		pos_chavep = pegar_chave_primaria(tabela);
+		if(pos_chavep == -1)
+			return;
 
-	// // pegando o número total de colunas na tabela
-	// tot_col = 
+		// abrindo arquivo da tabela
+		arq = fopen(tabela, "r");
+		if(arq == NULL){
+			mostrar_erro(10);
+			return;
+		}
+
+		// verificando se a chave primaria existe
+		linha = 0;
+		for(int i=0; i<(2*tot_col)+pos_chavep; i++){
+			fscanf(arq, "%s", valor);
+		}
+		while(fscanf(arq, "%s", valor) != EOF){
+			linha++;
+			if(strcmp(valor, chavep) == 0){
+				sair = 1;
+				break;
+			}
+			for(int i=0; i<tot_col-1; i++)
+				fscanf(arq, "%s", valor);
+		}
+		fclose(arq);
+		if(sair == 0){
+			mostrar_erro(11);
+			if(menu_continuar() == 0)
+				return;
+		}
+	}
+
+	// abrindo arquivo da tabela
+	arq = fopen(tabela, "r");
+	if(arq == NULL){
+		mostrar_erro(10);
+		return;
+	}
+
+	// criando arquivo auxiliar
+	FILE * arq_aux = fopen("auxiliar.txt", "w");
+	if(arq_aux == NULL){
+		mostrar_erro(10);
+		fclose(arq);
+		return;
+	}
+
+	// passando linhas não deletadas para auxiliar.txt
+	rewind(arq);
+	auxlinha = 0;
+	for(int i=0; i<(2*tot_col)+1; i++){
+		fscanf(arq, "%s", valor);
+		fprintf(arq_aux, "%s ", valor);
+	}
+	fprintf(arq_aux, "\n");
+	while(fscanf(arq, "%s", valor) != EOF){
+		auxlinha++;
+		if(auxlinha == linha){
+			for(int i=0; i<tot_col-1; i++)
+				fscanf(arq, "%s", valor);
+			continue;
+		}
+
+		fprintf(arq_aux, "%s ", valor);
+		for(int i=0; i<tot_col-1; i++){
+			fscanf(arq, "%s", valor);
+			fprintf(arq_aux, "%s ", valor);
+		}
+		fprintf(arq_aux, "\n");
+	}
+
+	// renomeando auxiliar.txt para o nome da tabela
+	fclose(arq);
+	fclose(arq_aux);
+	remove(tabela);
+	rename("auxiliar.txt", tabela);
+
+	// mensagem de linha deletada com sucesso
+	limpar();
+	printf("linha deletada com sucesso!\n");
+	menu_voltar();
 }
 
 void listar_todas_tabelas(){

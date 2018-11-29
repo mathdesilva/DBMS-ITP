@@ -11,7 +11,7 @@ CFLAGS = -Wall -Wextra
 output: $(OBJ_DIR)/main.o $(OBJ_DIR)/menu.o $(OBJ_DIR)/tabela.o $(OBJ_DIR)/uteis.o $(OBJ_DIR)/pesquisas.o 
 	mkdir -p bin
 	$(CC) $(CFLAGS) $(OBJ_DIR)/main.o $(OBJ_DIR)/menu.o $(OBJ_DIR)/tabela.o $(OBJ_DIR)/uteis.o $(OBJ_DIR)/pesquisas.o -o $(BIN_DIR)/dbms_itp
-
+	
 $(OBJ_DIR)/main.o: $(SRC_DIR)/main.c
 	mkdir -p obj
 	$(CC) -c $(SRC_DIR)/main.c -o $(OBJ_DIR)/main.o $(CFLAGS)

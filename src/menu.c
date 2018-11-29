@@ -10,8 +10,8 @@ int menu_principal(){
 		printf("  3 - Listar tabelas existentes\n");
 		printf("  4 - Mostra dados de tabela\n");
 		printf("  5 - Pesquisar dado\n");
-		printf("  6 - Deletar tabela        \n");
-		printf("  7 - Deletar linha         (fazendo)\n");
+		printf("  6 - Deletar tabela\n");
+		printf("  7 - Deletar linha\n");
 		printf("  0 - Sair\n");
 		printf("Escolha uma opção: ");
 		scanf("%d", &op);

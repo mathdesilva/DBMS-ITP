@@ -45,9 +45,10 @@ void pesquisar_print(char arquivo[60], char coluna[60], int codigo){
 		printf("Digite o valor para busca (%s): ", pegar_tipo(tipo));
 		scanf("%s", valor_busca);
 		if(verificar_valor(valor_busca, tipo) == 0){
-			mostrar_erro(13);
-			if(menu_continuar() == 0)
+			if(menu_continuar() == 0){
+				fclose(arq);
 				return;
+			}
 		}
 		else
 			sair = 1;

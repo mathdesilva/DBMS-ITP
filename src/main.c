@@ -28,7 +28,7 @@ int main(){
 				del_tabela();
 				break;
 			case 7: // deletar linha
-				//del_linha();
+				del_linha();
 				break;
 			case 0: // sair
 				break;
