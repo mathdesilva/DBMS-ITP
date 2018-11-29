@@ -1,7 +1,8 @@
 #include "../include/menu.h"
 
 int menu_principal(){
-	int op, aux = 0;
+	char op[60];
+	int aux = 0;
 	while(aux == 0){
 		limpar();
 		printf("======= MENU PRINCIPAL =======\n");
@@ -14,20 +15,21 @@ int menu_principal(){
 		printf("  7 - Deletar linha\n");
 		printf("  0 - Sair\n");
 		printf("Escolha uma opção: ");
-		scanf("%d", &op);
+		scanf("%s", op);
 
-		if(op >= 0 && op <=7)
+		if(strlen(op) == 1 && op[0] >= '0' && op[0] <= '7')
 			aux++;
 		else
 			mostrar_erro(2);
 	}
 	limpar();
 
-	return op;
+	return atoi(op);
 }
 
 int menu_addcoluna(){
-	int op, aux=0;
+	char op[60];
+	int aux=0;
 	
 	while(aux == 0){
 		limpar();
@@ -35,20 +37,21 @@ int menu_addcoluna(){
 		printf("  1 - Add nova coluna\n");
 		printf("  0 - Sair\n");
 		printf("Digite uma opção: ");
-		scanf("%d", &op);
+		scanf("%s", op);
 
-		if(op >=0 && op <=1)
+		if(strlen(op) == 1 && op[0] >= '0' && op[0] <= '1')
 			aux++;
 		else
 			mostrar_erro(2);
 	}
 	limpar();
 	
-	return op;
+	return atoi(op);
 }
 
 int menu_tipo(){
-	int op, aux=0;
+	char op[60];
+	int aux=0;
 
 	while(aux == 0){
 		printf("Tipo:\n");
@@ -58,60 +61,63 @@ int menu_tipo(){
 		printf("  4 - Float\n");
 		printf("  5 - Double\n");
 		printf("Digite uma opção: ");
-		scanf("%d", &op);
+		scanf("%s", op);
 
-		if(op >= 1 && op <= 5)
+		if(strlen(op) == 1 && op[0] >= '1' && op[0] <= '5')
 			aux++;
 		else
 			mostrar_erro(2);
 	}
 	limpar();
 
-	return op;
+	return atoi(op);
 }
 
 int menu_chaveprimaria(){
-	int op, aux=0;
+	char op[60];
+	int aux=0;
 
 	while(aux == 0){
 		printf("Esta coluna é uma chave primaria?\n");
 		printf("  1 - Sim\n");
 		printf("  0 - Não\n");
 		printf("Escolha uma opção: ");
-		scanf("%d", &op);
+		scanf("%s", op);
 
-		if(op == 0 || op == 1)
+		if(strlen(op) == 1 && (op[0] == '0' || op[0] == '1'))
 			aux++;
 		else
 			mostrar_erro(2);
 	}
 	limpar();
 	
-	return op;
+	return atoi(op);
 }
 
 int menu_continuar(){
-	int op, aux=0;
+	char op[60];
+	int aux=0;
 
 	while(aux == 0){
 		printf("Deseja continuar?\n");
 		printf("  1 - Sim\n");
 		printf("  0 - Sair\n");
 		printf("Escolha uma opção: ");
-		scanf("%d", &op);
+		scanf("%s", op);
 
-		if(op == 0 || op == 1)
+		if(strlen(op) == 1 && (op[0] == '0' || op[0] == '1'))
 			aux++;
 		else
 			mostrar_erro(2);
 	}
 	limpar();
 	
-	return op;
+	return atoi(op);
 }
 
 int menu_pesquisa1(){
-	int op, aux=0;
+	char op[60];
+	int aux=0;
 
 	while(aux == 0){
 		limpar();
@@ -123,20 +129,21 @@ int menu_pesquisa1(){
 		printf("  5 - Valores menores ou iguais\n");
 		printf("  0 - Sair\n");
 		printf("Digite uma opção: ");
-		scanf("%d", &op);
+		scanf("%s", op);
 
-		if(op >= 0 && op <=5)
+		if(strlen(op) == 1 && op[0] >= '0' && op[0] <= '5')
 			aux++;
 		else
 			mostrar_erro(2);
 	}
 	limpar();
 
-	return op;
+	return atoi(op);
 }
 
 int menu_pesquisa2(){
-	int op, aux=0;
+	char op[60];
+	int aux=0;
 
 	while(aux == 0){
 		limpar();
@@ -149,16 +156,16 @@ int menu_pesquisa2(){
 		printf("  6 - Valores próximos\n");
 		printf("  0 - Sair\n");
 		printf("Digite uma opção: ");
-		scanf("%d", &op);
+		scanf("%s", op);
 
-		if(op >= 0 && op <=6)
+		if(strlen(op) == 1 && op[0] >= '0' && op[0] <= '6')
 			aux++;
 		else
 			mostrar_erro(2);
 	}
 	limpar();
 
-	return op;
+	return atoi(op);
 }
 
 void menu_voltar(){
