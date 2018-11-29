@@ -7,16 +7,16 @@ Será necessário para a compilação do programa:
 * ''gcc''
 
 Para compilar basta clonar o repositório, entrar no diretório raiz do projeto e digitar no terminal:
-''make''
+`make`
 
 Para rodar o programa use:
-''./bin/dbms_itp''
+`./bin/dbms_itp`
 
 Para deletar os arquivos gerados na compilação use:
-''make clean''
+`make clean`
 
 Para deletar os arquivos gerados na compilação e na execução do programa use:
-'''make cleanall'''
+`make cleanall`
 
 ## Informações sobre o projeto
 
