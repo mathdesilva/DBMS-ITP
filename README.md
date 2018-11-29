@@ -3,19 +3,22 @@
 ## Como usar:
 
 Será necessário para a compilação do programa:
-* ''make''
-* ''gcc''
-
+* `make`
+* `gcc`
 Para compilar basta clonar o repositório, entrar no diretório raiz do projeto e digitar no terminal:
+
 `make`
 
 Para rodar o programa use:
+
 `./bin/dbms_itp`
 
 Para deletar os arquivos gerados na compilação use:
+
 `make clean`
 
 Para deletar os arquivos gerados na compilação e na execução do programa use:
+
 `make cleanall`
 
 ## Informações sobre o projeto
