@@ -6,7 +6,7 @@ Será necessário para a compilação do programa:
 * 'make'
 * 'gcc'
 
-Para compilar basta clonar o repositório, entrar diretório raiz do projeto e digitar no terminal:
+Para compilar basta clonar o repositório, entrar no diretório raiz do projeto e digitar no terminal:
 'make'
 
 Para rodar o programa use:
@@ -20,7 +20,7 @@ Para deletar os arquivos gerados na compilação e na execução do programa use
 
 ## Informações sobre o projeto
 
-Neste projeto, foi implementado um Sistema de Gereciamento de Banco de Dados de forma simplificada em C, a fim de explorar os conhecimentos na linguagem.
+Nesse projeto, foi implementado um Sistema de Gereciamento de Banco de Dados de forma simplificada em C, com a finalidade de explorar os conhecimentos na linguagem.
 
 ### Funcionalidades:
 
