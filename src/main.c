@@ -2,7 +2,6 @@
 #include "../include/menu.h"
 #include "../include/tabela.h"
 #include "../include/uteis.h"
-#include "../include/pesquisas.h"
 
 int main(){
 	criar_arquivos_locais();
