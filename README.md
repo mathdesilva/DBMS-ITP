@@ -5,6 +5,7 @@
 Será necessário para a compilação do programa:
 * `make`
 * `gcc`
+
 Para compilar basta clonar o repositório, entrar no diretório raiz do projeto e digitar no terminal:
 
 `make`
@@ -37,9 +38,11 @@ Nesse projeto, foi implementado um Sistema de Gereciamento de Banco de Dados de 
 	* Valores iguais ao valor informado
 	* Valores menores que o valor informado
 	* Valores menores ou iguais ao valor informado
-	* Valores próximos (somente para strings)
+	* Valores próximos¨ (somente para strings)
 * **Deletar tabela**
 * **Deletar linha**
+
+¨ A função de pesquisa por valores próximos procura se o valor informado é igual ou substring de algum valor da coluna ou se algum valor da coluna é substring do valor informado.
 
 ### Requisitos atendidos:
 
