@@ -410,6 +410,12 @@ void del_linha(){
 		}
 	}
 
+	// verificando se há linhas na tabela
+	if(linha == 0){
+		mostrar_erro(18);
+		return;
+	}
+
 	// abrindo arquivo da tabela
 	arq = fopen(tabela, "r");
 	if(arq == NULL){

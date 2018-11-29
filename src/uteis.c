@@ -55,6 +55,9 @@ void mostrar_erro(int codigo){
 		case 17:
 			fprintf(stderr, "Erro 17: coluna não existe\n");
 			break;
+		case 18:
+			fprintf(stderr, "Erro 18: não há linhas nessa tabela\n");
+			break;
 	}
 
 	menu_voltar();
