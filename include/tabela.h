@@ -86,4 +86,9 @@ int listar_colunas(char arquivo[60]);
 // retorna -1 em caso de erro
 int pegar_tipo_coluna(char arquivo[60], char coluna[60]);
 
+// verifica se há tabelas registradas
+// retorna 1 caso haja tabelas no registo
+// retorna 0 caso não haja tabelas no registro
+int ha_tabelas();
+
 #endif

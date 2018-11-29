@@ -130,8 +130,15 @@ int add_coluna(FILE * arquivo, int chave_adicionada){
 void add_linha(){
 	char nome[60];
 
+	// verificando se há tabelas
+	if(ha_tabelas() == 0){
+		mostrar_erro(19);
+		return;
+	}
+
 	// pegar o nome da tabela
-	listar_tabelas();
+	if(listar_tabelas() == -1)
+		return;
 	printf("Digite o nome da tabela: ");
 	scanf("%s", nome);
 	strcat(nome, ".txt");
@@ -287,6 +294,12 @@ void add_linha(){
 void del_tabela(){
 	char nome[60];
 
+	// verificando se há tabelas
+	if(ha_tabelas() == 0){
+		mostrar_erro(19);
+		return;
+	}
+
 	//listar todas as tabelas existentes
  	if(listar_tabelas() == 2)
 		return;
@@ -342,6 +355,12 @@ void del_linha(){
 	int tot_col, pos_chavep, sair = 0, retorno, linha, auxlinha;
 	char tabela[60], chavep[60], valor[60];
 	FILE * arq;
+
+	// verificando se há tabelas
+	if(ha_tabelas() == 0){
+		mostrar_erro(19);
+		return;
+	}
 
 	// pegando o nome da tabela
 	while(sair == 0){
@@ -469,6 +488,12 @@ void del_linha(){
 void listar_todas_tabelas(){
 	limpar();
 
+	// verificando se há tabelas
+	if(ha_tabelas() == 0){
+		mostrar_erro(19);
+		return;
+	}
+
 	// chamando função que lista todas as tabelas
 	if(listar_tabelas() == -1)
 		return;
@@ -505,6 +530,12 @@ int listar_tabelas(){
 
 void listar_todos_dados_tabelas(){
 	char nome[60];
+
+	// verificando se há tabelas
+	if(ha_tabelas() == 0){
+		mostrar_erro(19);
+		return;
+	}
 
 	// pegar nome da tabela
 	if(listar_tabelas() == -1)
@@ -600,6 +631,12 @@ int listar_dados_tabelas(char tabela[60]){
 void pesquisar(){
 	int sair=0, retorno, op;
 	char tabela[60], coluna[60];
+
+	// verificando se há tabelas
+	if(ha_tabelas() == 0){
+		mostrar_erro(19);
+		return;
+	}
 
 	// pegando o nome da tabela
 	while(sair == 0){
@@ -871,4 +908,24 @@ int pegar_tipo_coluna(char arquivo[60], char coluna[60]){
 	mostrar_erro(15);
 	fclose(arq);
 	return -1;
+}
+
+int ha_tabelas(){
+	// abrindo arquivo
+	FILE * arq = fopen("tabelas.txt", "r");
+	if(arq == NULL){
+		mostrar_erro(4);
+		return 2;
+	}
+
+	// verificando
+	char valor[60];
+	if(fscanf(arq, "%s", valor) != EOF){
+		fclose(arq);
+		return 1;
+	}
+	else{
+		fclose(arq);
+		return 0;
+	}
 }

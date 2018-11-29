@@ -58,6 +58,9 @@ void mostrar_erro(int codigo){
 		case 18:
 			fprintf(stderr, "Erro 18: não há linhas nessa tabela\n");
 			break;
+		case 19:
+			fprintf(stderr, "Erro 19: não há tabelas criadas\n");
+			break;
 	}
 
 	menu_voltar();
