@@ -52,6 +52,6 @@ Foram atendidos os seguintes requisitos na realização do código-fonte:
 * Leitura e escrita a partir de arquivos
 * Modularização interna e externa
 * Uso de boas práticas de programação
-* Todos os erros emitidos via 'stderr'
+* Todos os erros emitidos via `stderr`
 * Documentação adequada
 
